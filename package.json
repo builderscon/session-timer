@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "compile:js": "babel src/js/app.jsx -o public/app.js",
+    "compile:css": "node-sass --output-style compressed src/stylesheets/all.scss > public/all.css",
     "test": "mocha"
   },
   "repository": {
