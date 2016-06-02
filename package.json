@@ -23,5 +23,8 @@
   "homepage": "https://github.com/builderscon/session-timer#readme",
   "dependencies": {
     "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "node-sass": "^3.7.0"
   }
 }
