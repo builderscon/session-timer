@@ -2,6 +2,21 @@
 import React, { Component } from 'react'
 
 export default class Timer extends Component {
+  static get propTypes() {
+    return {
+      limit: React.PropTypes.number.isRequired,
+      onLimit: React.PropTypes.func,
+      onTick: React.PropTypes.func
+    }
+  }
+
+  static get defaultProps() {
+    return {
+      onLimit: () => {},
+      onTick: () => {}
+    }
+  }
+
   constructor(props) {
     super(props)
 
@@ -54,7 +69,7 @@ export default class Timer extends Component {
 
     this.props.onTick(past)
 
-    if (past > this.props.limit) {
+    if (past >= this.props.limit) {
       this.handleLimit()
     }
   }
