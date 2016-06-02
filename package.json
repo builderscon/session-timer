@@ -1,0 +1,27 @@
+{
+  "name": "session-timer",
+  "version": "1.0.0",
+  "description": "[WIP] The Official? builderscon Session Timer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/builderscon/session-timer.git"
+  },
+  "keywords": [
+    "builderscon",
+    "timer"
+  ],
+  "author": "Leko <leko.noor@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/builderscon/session-timer/issues"
+  },
+  "homepage": "https://github.com/builderscon/session-timer#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
