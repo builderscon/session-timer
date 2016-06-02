@@ -54,7 +54,7 @@ export default class Timer extends Component {
 
     this.props.onTick(past)
 
-    if (past> this.props.limit) {
+    if (past > this.props.limit) {
       this.handleLimit()
     }
   }
