@@ -1,0 +1,55 @@
+
+$logo_size: 300px;
+$bg_notice: #0f0;
+$bg_warning: #ff0;
+$bg_danger: #f00;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+}
+
+/* 公式サイトから画像引っ張ってきているので行儀悪かったら修正お願いします */
+.logo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  transform-origin: 50% 50% 0;
+  width: $logo_size;
+  height: $logo_size;
+  background-image: url(http://builderscon.io/assets/images/hex_base.png);
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+.logo img {
+  display: block;
+  margin: $logo_size * 0.2 auto 0;
+  width: $logo_size * 0.6;
+  height: $logo_size * 0.6;
+}
+
+time {
+  display: block;
+  font-size: 300px;
+  text-align: center;
+}
+
+.rest-time {
+  transition: .3s background-color;
+}
+
+.rest-time.notice {
+  background: $bg_notice;
+}
+
+.rest-time.warning {
+  background: $bg_warning;
+}
+
+.rest-time.danger {
+  background: $bg_danger;
+}

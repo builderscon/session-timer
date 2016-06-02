@@ -1,0 +1,2 @@
+html,body{margin:0;padding:0;background:#000;color:#fff}.logo{position:fixed;bottom:20px;right:20px;transform-origin:50% 50% 0;width:300px;height:300px;background-image:url(http://builderscon.io/assets/images/hex_base.png);-webkit-background-size:cover;background-size:cover}.logo img{display:block;margin:60px auto 0;width:180px;height:180px}time{display:block;font-size:300px;text-align:center}.rest-time{transition:.3s background-color}.rest-time.notice{background:lime}.rest-time.warning{background:#ff0}.rest-time.danger{background:red}
+
