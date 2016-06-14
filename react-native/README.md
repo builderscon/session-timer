@@ -11,4 +11,4 @@ usage
 screen shot
 -----------
 
-![screenshot](https://raw.githubusercontent.com/builderscon/session-timer/images/images/screenshot.gif)
+![screenshot](https://raw.githubusercontent.com/builderscon/session-timer/images/react-native/images/screenshot.gif)
