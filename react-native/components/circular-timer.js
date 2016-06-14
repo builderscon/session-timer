@@ -2,8 +2,6 @@
 
 import React, { Component } from 'react'
 import {
-    Alert,
-    AppRegistry,
     StyleSheet,
     Text,
     TouchableHighlight,
@@ -13,37 +11,44 @@ import {
 import * as Progress from 'react-native-progress'
 import NotificatableTimer from '../domain/notification-timer'
 
-const FPS = 60
+const { PropTypes } = React
+
+const DEFAULT = {
+    FPS: 60,
+    TOTAL: 60 * 60 * 1000,
+}
 function zeroPadding (n) {
     return ('0' + n.toString()).slice(-2)
 }
 
 export default class CircularTimer extends Component {
+    static get propTypes () {
+        return {
+            total: PropTypes.number,
+            terminateCallback: PropTypes.func,
+            notifications: PropTypes.arrayOf(PropTypes.object),
+            progress: PropTypes.number,
+            fps: PropTypes.number,
+        }
+    }
+
     constructor(props) {
         super(props)
 
-        this.total = 60 * 60 * 1000
+        this.total = props.total != null
+            ? props.total
+            : DEFAULT.TOTAL
+
+        const terminateCallback = props.terminateCallback
+            ? props.terminateCallback
+            : () => {}
+
         this.timer = new NotificatableTimer({
             total: this.total,
-            terminaterCallback: () => {
-                Alert.alert('title', 'message')
-            },
-            notifications: [
-                {
-                    at: 5 * 60 * 1000,
-                    callback: () => {
-                        Alert.alert('caution', 'last 5 minute')
-                    }
-                },
-                {
-                    at: 15 * 60 * 1000,
-                    callback: () => {
-                        Alert.alert('warning', 'last 15 minute')
-                    }
-                }
-            ],
+            terminateCallback: terminateCallback,
+            notifications: props.notifications,
             animation: {
-                interval: 1000 / FPS,
+                interval: 1000 / DEFAULT.FPS,
                 callback: (duration, total) => {
                     const progress = duration / total
                     this.setState({
@@ -53,8 +58,12 @@ export default class CircularTimer extends Component {
             },
         })
 
+        const progress = props.progress != null
+            ? props.progress
+            : 0
+
         this.state = {
-            progress: 0,
+            progress: progress,
         }
     }
 
@@ -67,7 +76,7 @@ export default class CircularTimer extends Component {
 
     render () {
         return (
-            <View style={styles.container}>
+            <View>
                 <TouchableOpacity onPress={() => this.timer.toggle()} activeOpacity={1.0}>
                     <View>
                         <Progress.Circle
@@ -96,12 +105,6 @@ export default class CircularTimer extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f5fcff',
-    },
     timerText: {
         color: 'rgba(0, 122, 255, 1)',
     },
