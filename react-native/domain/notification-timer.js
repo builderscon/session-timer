@@ -24,16 +24,12 @@ export default class NotificatableTimer {
         if (this.on) {
             return
         }
-        this.startable = true
         this.consumed = 0
         this.duration = 0
         this.on = false
     }
 
     start () {
-        if (!this.startable) {
-            return
-        }
         this.base = new Date()
         this.on = true
         this.setupTerminater()
@@ -43,7 +39,6 @@ export default class NotificatableTimer {
 
     setupTerminater () {
         this.terminater.timeoutId = setTimeout(() => {
-            this.startable = false
             this.stop()
             this.terminater.callback()
         }, this.total - this.consumed)
@@ -81,12 +76,5 @@ export default class NotificatableTimer {
                 clearTimeout(timeoutId)
             }
         })
-    }
-
-    toggle () {
-        if (!this.startable) {
-            return
-        }
-        this.on ? this.stop() : this.start()
     }
 }
