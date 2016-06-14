@@ -41,8 +41,19 @@ export default function timer(state = initialState, action = {}) {
                 ...state,
                 progress: state.timer.duration / state.timer.total,
             }
+        case types.START:
+            state.timer.start()
+            return {
+                ...state,
+                running: true,
+            }
+        case types.STOP:
+            state.timer.stop()
+            return {
+                ...state,
+                running: false,
+            }
         case types.RESET:
-            // TODO: this is side effect?
             state.timer.reset()
             return {
                 ...state,

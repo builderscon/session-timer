@@ -7,9 +7,9 @@ import {
     StyleSheet,
     Text,
     TouchableHighlight,
-    TouchableOpacity,
     View,
 } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import CircularTimer from '../components/circular-timer'
 import * as actions from '../actions/creators'
 
@@ -20,32 +20,65 @@ class App extends Component {
         super(props)
     }
 
-    toggle () {
-        const { state, actions } = this.props
-        state.timer.toggle()
-        if (this.intervalId == null) {
-            this.intervalId = setInterval(actions.sync, 1000 / FPS)
-        } else {
-            clearInterval(this.intervalId)
-            delete this.intervalId
-        }
+    start () {
+        const { actions } = this.props
+        actions.start()
+        this.intervalId = setInterval(actions.sync, 1000 / FPS)
+    }
+
+    stop () {
+        const { actions } = this.props
+        actions.stop()
+        clearInterval(this.intervalId)
+    }
+
+    get iconName () {
+        return this.props.state.running ? 'play': 'pause'
+    }
+    get iconColor () {
+        return this.props.state.running ? '#222222' : '#777777'
+    }
+    //TODO: disable the reset button when timer is runnning
+    get resetButtonColor () {
+        return this.props.state.running ? '#aaaaaa' : '#aaaaaa'
+    }
+    get toggleButtonColor () {
+        return this.props.state.running ? '#ea5432' : '#5db7e8'
+    }
+    get toggleButtonText () {
+        return this.props.state.running ? 'Stop': 'Start'
     }
 
     render () {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => this.toggle()} activeOpacity={1.0}>
-                    <View>
-                        <CircularTimer
-                            total={state.timer.total}
-                            progress={state.progress}
+                <View style={styles.timer}>
+                    <Text style={styles.icon}>
+                        <Icon
+                            name={this.iconName}
+                            size={40}
+                            color={this.iconColor}
                         />
+                    </Text>
+                    <CircularTimer
+                        total={state.timer.total}
+                        progress={state.progress}
+                        running={state.running}
+                    />
+                </View>
+                <View style={styles.buttons}>
+                    <View style={styles.button}>
+                        <TouchableHighlight onPress={actions.reset}>
+                            <Text style={[styles.resetButton, {backgroundColor: this.resetButtonColor}]}>Reset</Text>
+                        </TouchableHighlight>
                     </View>
-                </TouchableOpacity>
-                <TouchableHighlight onPress={actions.reset}>
-                    <Text style={styles.reset}>Reset</Text>
-                </TouchableHighlight>
+                    <View style={styles.button}>
+                        <TouchableHighlight onPress={() => state.running ? this.stop(): this.start()}>
+                            <Text style={[styles.toggleButton, {backgroundColor: this.toggleButtonColor}]}>{this.toggleButtonText}</Text>
+                        </TouchableHighlight>
+                    </View>
+                </View>
             </View>
         )
     }
@@ -54,18 +87,46 @@ class App extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f5fcff',
+        justifyContent: 'flex-end',
+        alignItems: 'stretch',
+        backgroundColor: '#eeeeee',
     },
-    reset: {
-        color: 'rgba(0, 122, 255, 1)',
-        fontSize: 32,
-        marginTop: 16,
-        padding: 8,
-        borderWidth: 2,
-        borderColor: 'rgba(0, 122, 255, 1)',
-        borderRadius: 3,
+    timer: {
+        flex: 5,
+        justifyContent: 'center',
+        alignSelf: 'center',
+    },
+    icon: {
+        top: 85,
+        alignSelf: 'center',
+        textAlign: 'center',
+    },
+    buttons: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    button: {
+        alignItems: 'stretch',
+        justifyContent: 'flex-end',
+        flex: 1,
+    },
+    resetButton: {
+        height: 100,
+        paddingTop: 20,
+        textAlign: 'center',
+        color: '#eeeeee',
+        fontSize: 40,
+        fontFamily: 'avenir',
+        fontWeight: 'bold',
+    },
+    toggleButton: {
+        height: 100,
+        paddingTop: 20,
+        textAlign: 'center',
+        color: '#eeeeee',
+        fontSize: 40,
+        fontFamily: 'avenir',
+        fontWeight: 'bold',
     },
 })
 

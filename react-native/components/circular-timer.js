@@ -24,26 +24,32 @@ export default class CircularTimer extends Component {
         super(props)
     }
 
-    formatProgress (progress) {
-        const { total } = this.props
+    formatProgress () {
+        const { total, progress } = this.props
         const remaining = (total * (1 - progress)) / 1000
         const remainingMinutes = Math.floor(remaining / 60)
         const remainingSeconds = Math.floor(remaining % 60)
         return zeroPadding(remainingMinutes) + ':' + zeroPadding(remainingSeconds)
     }
 
+    get circleColor () {
+        return this.props.running ? '#5db7e8' : '#ea5432'
+    }
+    get textColor () {
+        return this.props.running ? '#222222' : '#777777'
+    }
+
     render () {
-        const { progress } = this.props
         return (
             <Progress.Circle
-                size={240}
-                progress={progress}
-                unfilledColor={'rgba(0, 122, 255, 1)'}
-                color={'#f5fcff'}
+                size={285}
+                progress={this.props.progress}
+                unfilledColor={this.circleColor}
+                color={'#eeeeee'}
                 thickness={10}
                 showsText={true}
-                formatText={(progress) => this.formatProgress(progress)}
-                textStyle={styles.timerText}
+                formatText={() => this.formatProgress()}
+                textStyle={[styles.timerText, {color: this.textColor}]}
             />
         )
     }
@@ -51,6 +57,9 @@ export default class CircularTimer extends Component {
 
 const styles = StyleSheet.create({
     timerText: {
-        color: 'rgba(0, 122, 255, 1)',
+        color: '#ddcecd',
+        top: 10,
+        fontFamily: 'avenir',
+        fontSize: 70,
     },
 })
