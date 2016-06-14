@@ -1,6 +1,6 @@
 'use strict'
 
-import { AppRegistry } from 'react-native';
-import CircularTimer from './components/circular-timer';
+import { AppRegistry } from 'react-native'
+import Container from './containers/container'
 
-AppRegistry.registerComponent('App', () => CircularTimer);
+AppRegistry.registerComponent('App', () => Container)
