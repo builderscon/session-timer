@@ -1,19 +1,21 @@
 'use strict'
 
+const DEFAULT_INTERVAL = 100
+
 // unit is milliseconds
 export default class NotificatableTimer {
     constructor ({
         total,
         terminaterCallback,
         notifications,
-        animation
+        interval,
     }) {
         this.total = total
         this.terminater = {
             callback: terminaterCallback
         }
         this.notifications = notifications
-        this.animation = animation
+        this.interval = interval || DEFAULT_INTERVAL
 
         this.reset()
     }
@@ -24,6 +26,7 @@ export default class NotificatableTimer {
         }
         this.startable = true
         this.consumed = 0
+        this.duration = 0
         this.on = false
     }
 
@@ -35,7 +38,7 @@ export default class NotificatableTimer {
         this.on = true
         this.setupTerminater()
         this.setupNotifications()
-        this.setupAnimation()
+        this.setupInterval()
     }
 
     setupTerminater () {
@@ -58,20 +61,20 @@ export default class NotificatableTimer {
         })
     }
 
-    setupAnimation () {
-        this.animation.intervalId = setInterval(() => {
+    setupInterval () {
+        this.intervalId = setInterval(() => {
             let duration = new Date() - this.base + this.consumed
             if (this.total < duration) {
                 duration = this.total
             }
-            this.animation.callback(duration, this.total)
-        }, this.animation.interval)
+            this.duration = duration
+        }, this.interval)
     }
 
     stop () {
         this.consumed += (new Date() - this.base)
         this.on = false
-        clearInterval(this.animation.intervalId)
+        clearInterval(this.intervalId)
         clearInterval(this.terminater.timeoutId)
         this.notifications.timeoutIds.forEach((timeoutId) => {
             if (timeoutId != null) {
