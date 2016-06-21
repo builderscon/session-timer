@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
 import * as reducers from '../reducers'
-import App from './app'
+import App from './android-app'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 const reducer = combineReducers(reducers)
