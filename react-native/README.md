@@ -8,10 +8,18 @@ usage
 2. open "ios/App.xcodeproj"
 3. click Run on Xcode
 
-screen shot
------------
+screen shots
+------------
 
-![screenshot](https://raw.githubusercontent.com/builderscon/session-timer/images/react-native/images/screenshot.gif)
+## iOS
+
+![ios](https://raw.githubusercontent.com/builderscon/session-timer/images/react-native/images/ios.gif)
+
+## Android
+
+react-native-progress is not fully supported for Android.
+
+![android](https://raw.githubusercontent.com/builderscon/session-timer/images/react-native/images/android.gif)
 
 sound
 -----
