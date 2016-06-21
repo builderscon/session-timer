@@ -6,13 +6,13 @@ const DEFAULT_INTERVAL = 100
 export default class NotificatableTimer {
     constructor ({
         total,
-        terminaterCallback,
+        terminateCallback,
         notifications,
         interval,
     }) {
         this.total = total
         this.terminater = {
-            callback: terminaterCallback
+            callback: terminateCallback
         }
         this.notifications = notifications
         this.interval = interval || DEFAULT_INTERVAL

@@ -23,7 +23,7 @@ const presets = {
     sixty: {
         total: 60 * 60 * 1000,
         terminateCallback: () => {
-            Alert.alert('title', 'message')
+            ting.play()
         },
         notifications: [
             {
