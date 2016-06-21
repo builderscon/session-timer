@@ -5,33 +5,12 @@ import NotificatableTimer from '../domain/notification-timer'
 import {
     Alert,
 } from 'react-native'
-
-const DEFAULT_TOTAL = 60 * 60 * 1000
-const timerSettings = {
-    total: 60 * 60 * 1000,
-    terminateCallback: () => {
-        Alert.alert('title', 'message')
-    },
-    notifications: [
-        {
-            at: 5 * 60 * 1000,
-            callback: () => {
-                Alert.alert('caution', 'last 5 minute')
-            }
-        },
-        {
-            at: 15 * 60 * 1000,
-            callback: () => {
-                Alert.alert('warning', 'last 15 minute')
-            }
-        }
-    ],
-}
+import presets from '../domain/presets'
 
 const initialState = {
     progress: 0,
     running: false,
-    timer: new NotificatableTimer(timerSettings),
+    timer: new NotificatableTimer(presets.sixty),
 }
 
 export default function timer(state = initialState, action = {}) {
