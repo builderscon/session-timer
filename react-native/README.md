@@ -12,3 +12,9 @@ screen shot
 -----------
 
 ![screenshot](https://raw.githubusercontent.com/builderscon/session-timer/images/react-native/images/screenshot.gif)
+
+sound
+-----
+
+©効果音ラボ
+http://soundeffect-lab.info/
