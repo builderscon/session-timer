@@ -20650,7 +20650,7 @@
 	            null,
 	            'Builderscon'
 	          ),
-	          _react2.default.createElement('img', { src: '/logo-flat.png', style: style })
+	          _react2.default.createElement('img', { src: './logo-flat.png', style: style })
 	        ),
 	        _react2.default.createElement(
 	          'time',

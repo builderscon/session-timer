@@ -38,7 +38,7 @@ export default class Timer extends Component {
       <div>
         <div className='logo second-hand'>
           <h1>Builderscon</h1>
-          <img src='/logo-flat.png' style={style}/>
+          <img src='./logo-flat.png' style={style}/>
         </div>
         <time>{humanizeTime}</time>
       </div>
