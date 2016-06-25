@@ -26,7 +26,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-modal-dialog": "^3.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
