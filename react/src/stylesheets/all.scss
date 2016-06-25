@@ -47,6 +47,7 @@ body {
   width: $size_toolbar_button;
   height: $size_toolbar_button;
   margin: ($size_toolbar - $size_toolbar_button)/2 20px;
+  padding: 0;
   background: $bg_toolbar;
   border-radius: $size_toolbar_button;
   border: 1px solid $color_toolbar_button;
