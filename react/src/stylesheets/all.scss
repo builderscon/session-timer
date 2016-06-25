@@ -15,7 +15,6 @@ body {
   color: #fff;
 }
 
-/* 公式サイトから画像引っ張ってきているので行儀悪かったら修正お願いします */
 .logo {
   width: 100%;
   text-align: center;
@@ -28,6 +27,22 @@ body {
 .logo img {
   width: $logo_size;
   transform-origin: 50% 50% 0;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: right;
+}
+nav a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  color: #fff;
+  text-decoration: initial;
+  background: rgba(0,0,0,0.1);
 }
 
 .toolbar {
@@ -47,6 +62,7 @@ body {
   width: $size_toolbar_button;
   height: $size_toolbar_button;
   margin: ($size_toolbar - $size_toolbar_button)/2 20px;
+  padding: 0;
   background: $bg_toolbar;
   border-radius: $size_toolbar_button;
   border: 1px solid $color_toolbar_button;
@@ -63,7 +79,8 @@ body {
 time {
   display: block;
   line-height: .35em;
-  font-size: 480px;
+  font-size: 25rem;
+  font-weight: bold;
   font-family: SinhalaMN-Bold;
 }
 

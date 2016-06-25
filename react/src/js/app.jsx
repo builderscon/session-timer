@@ -18,6 +18,9 @@ export default class App extends Component {
   render() {
     return (
       <div className={'rest-time ' + this.state.restTimeClassName}>
+        <nav>
+          <a href="https://github.com/builderscon/session-timer" target="_blank">Github</a>
+        </nav>
         <SE ref="se" sound={this.props.sound} />
         <Timer ref="timer" limit={this.state.limit} onTick={this.handleTick.bind(this)} onLimit={this.handleLimit.bind(this)} />
         <Toolbar>
