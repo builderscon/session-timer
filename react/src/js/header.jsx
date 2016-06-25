@@ -27,11 +27,10 @@ export default class Header extends Component {
           <ModalContainer>
             <ModalDialog className="modal" onClose={this.handleModalClose.bind(this)}>
               <h2>Builderscon session timer</h2>
-              <h3>Term of use</h3>
-              <ul>
-                <li>Free to use as long as builderscon link and logo are visible</li>
-                <li>We are not responsible for any damages</li>
-              </ul>
+
+              <h3>Term of service</h3>
+              <p>Please read it using the following link: <a href="./tos.txt" target="_blank">Term of service</a></p>
+
               <h3>License</h3>
               <p><a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></p>
             </ModalDialog>

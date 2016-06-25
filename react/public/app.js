@@ -20594,20 +20594,16 @@
 	            _react2.default.createElement(
 	              'h3',
 	              null,
-	              'Term of use'
+	              'Term of service'
 	            ),
 	            _react2.default.createElement(
-	              'ul',
+	              'p',
 	              null,
+	              'Please read it using the following link: ',
 	              _react2.default.createElement(
-	                'li',
-	                null,
-	                'Free to use as long as builderscon link and logo are visible'
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                'We are not responsible for any damages'
+	                'a',
+	                { href: './tos.txt', target: '_blank' },
+	                'Term of service'
 	              )
 	            ),
 	            _react2.default.createElement(
