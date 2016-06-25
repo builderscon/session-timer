@@ -20428,6 +20428,15 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'rest-time ' + this.state.restTimeClassName },
+	        _react2.default.createElement(
+	          'nav',
+	          null,
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'https://github.com/builderscon/session-timer', target: '_blank' },
+	            'Github'
+	          )
+	        ),
 	        _react2.default.createElement(_se2.default, { ref: 'se', sound: this.props.sound }),
 	        _react2.default.createElement(_timer2.default, { ref: 'timer', limit: this.state.limit, onTick: this.handleTick.bind(this), onLimit: this.handleLimit.bind(this) }),
 	        _react2.default.createElement(

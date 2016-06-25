@@ -15,7 +15,6 @@ body {
   color: #fff;
 }
 
-/* 公式サイトから画像引っ張ってきているので行儀悪かったら修正お願いします */
 .logo {
   width: 100%;
   text-align: center;
@@ -28,6 +27,22 @@ body {
 .logo img {
   width: $logo_size;
   transform-origin: 50% 50% 0;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: right;
+}
+nav a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  color: #fff;
+  text-decoration: initial;
+  background: rgba(0,0,0,0.1);
 }
 
 .toolbar {
