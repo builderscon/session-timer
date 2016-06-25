@@ -1,11 +1,14 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css';
 
-$logo_size: 300px;
-$bg_notice: #0f0;
-$bg_warning: #ff0;
-$bg_danger: #f00;
+$logo_size: 120px;
+$size_toolbar_button: 100px;
+$color_toolbar_button: #fff;
+$size_toolbar: 150px;
+$bg_toolbar: #434343;
 
 html,
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
   background: #000;
@@ -14,42 +17,96 @@ body {
 
 /* 公式サイトから画像引っ張ってきているので行儀悪かったら修正お願いします */
 .logo {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  transform-origin: 50% 50% 0;
+  width: 100%;
+  text-align: center;
+}
+.logo h1 {
+  margin: 0;
+  padding: 10px 0;
+  font-family: SinhalaMN-Bold;
+}
+.logo img {
   width: $logo_size;
-  height: $logo_size;
-  background-image: url(http://builderscon.io/assets/images/hex_base.png);
-  -webkit-background-size: cover;
-  background-size: cover;
+  transform-origin: 50% 50% 0;
 }
 
-.logo img {
-  display: block;
-  margin: $logo_size * 0.2 auto 0;
-  width: $logo_size * 0.6;
-  height: $logo_size * 0.6;
+.toolbar {
+  position: fixed;
+  width: 100%;
+  height: $size_toolbar;
+  bottom: 0;
+  background: $bg_toolbar;
+  text-align: center;
+}
+.toolbar select,
+.toolbar button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: $size_toolbar_button;
+  height: $size_toolbar_button;
+  margin: ($size_toolbar - $size_toolbar_button)/2 20px;
+  background: $bg_toolbar;
+  border-radius: $size_toolbar_button;
+  border: 1px solid $color_toolbar_button;
+  color: $color_toolbar_button;
+  font-family: SinhalaMN-Bold;
+  font-weight: bold;
+  font-size: 36px;
+}
+// http://stackoverflow.com/questions/10813528/is-it-possible-to-center-text-in-select-box
+.toolbar select {
+  text-indent: 12px;
 }
 
 time {
   display: block;
-  font-size: 300px;
-  text-align: center;
+  line-height: .35em;
+  font-size: 480px;
+  font-family: SinhalaMN-Bold;
 }
 
+body,
+#timer,
+.rest-time {
+  height: 100%;
+  text-align: center;
+}
 .rest-time {
   transition: .3s background-color;
+  background-color: #00b6b6;
+  background-image:
+    linear-gradient(135deg,
+      rgba(0,0,0,.24)  0px,  rgba(0,0,0,.24) 29px,
+      rgba(0,0,0,.21) 30px,  rgba(0,0,0,.21) 59px, 
+      rgba(0,0,0,.18) 60px,  rgba(0,0,0,.18) 89px,
+      rgba(0,0,0,.15) 90px,  rgba(0,0,0,.15) 119px,
+      rgba(0,0,0,.12) 120px, rgba(0,0,0,.12) 149px,
+      rgba(0,0,0,.09) 150px, rgba(0,0,0,.09) 179px,
+      rgba(0,0,0,.06) 180px, rgba(0,0,0,.06) 209px,
+      rgba(0,0,0,.03) 210px, rgba(0,0,0,.03) 239px,
+      rgba(0,0,0,0.0) 240px, rgba(0,0,0,0.0) 269px),
+    linear-gradient(315deg,
+      rgba(0,0,0,.24)  0px,  rgba(0,0,0,.24) 29px,
+      rgba(0,0,0,.21) 30px,  rgba(0,0,0,.21) 59px, 
+      rgba(0,0,0,.18) 60px,  rgba(0,0,0,.18) 89px,
+      rgba(0,0,0,.15) 90px,  rgba(0,0,0,.15) 119px,
+      rgba(0,0,0,.12) 120px, rgba(0,0,0,.12) 149px,
+      rgba(0,0,0,.09) 150px, rgba(0,0,0,.09) 179px,
+      rgba(0,0,0,.06) 180px, rgba(0,0,0,.06) 209px,
+      rgba(0,0,0,.03) 210px, rgba(0,0,0,.03) 239px,
+      rgba(0,0,0,0.0) 240px, rgba(0,0,0,0.0) 269px);
 }
 
 .rest-time.notice {
-  background: $bg_notice;
+  background-color: #00b661;
 }
 
 .rest-time.warning {
-  background: $bg_warning;
+  background-color: #b6b600;
 }
 
 .rest-time.danger {
-  background: $bg_danger;
+  background-color: #b63c00;
 }

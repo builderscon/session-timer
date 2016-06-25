@@ -65,11 +65,11 @@
 
 	//
 	var choices = {
-	  60: '60秒',
-	  300: '5分',
-	  900: '15分',
-	  1800: '30分',
-	  3600: '60分'
+	  60: '01:00',
+	  300: '05:00',
+	  900: '15:00',
+	  1800: '30:00',
+	  3600: '60:00'
 	};
 
 	_reactDom2.default.render(_react2.default.createElement(_app2.default, { sound: se, choices: choices }), document.getElementById('timer'));
@@ -183,6 +183,31 @@
 	// shim for using process in browser
 
 	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
+	    }
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
+	    }
+	  }
+	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -207,7 +232,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -224,7 +249,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -236,7 +261,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -20366,7 +20391,11 @@
 
 	var _timer2 = _interopRequireDefault(_timer);
 
-	var _se = __webpack_require__(171);
+	var _toolbar = __webpack_require__(171);
+
+	var _toolbar2 = _interopRequireDefault(_toolbar);
+
+	var _se = __webpack_require__(172);
 
 	var _se2 = _interopRequireDefault(_se);
 
@@ -20401,16 +20430,20 @@
 	        { className: 'rest-time ' + this.state.restTimeClassName },
 	        _react2.default.createElement(_se2.default, { ref: 'se', sound: this.props.sound }),
 	        _react2.default.createElement(_timer2.default, { ref: 'timer', limit: this.state.limit, onTick: this.handleTick.bind(this), onLimit: this.handleLimit.bind(this) }),
-	        _react2.default.createElement(_config2.default, { choices: this.props.choices, onChange: this.handleChangeLimit.bind(this) }),
 	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.handleClickStart.bind(this) },
-	          'Start'
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.handleClickStop.bind(this) },
-	          'Stop'
+	          _toolbar2.default,
+	          null,
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleClickStart.bind(this) },
+	            'Start'
+	          ),
+	          _react2.default.createElement(_config2.default, { choices: this.props.choices, onChange: this.handleChangeLimit.bind(this) }),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleClickStop.bind(this) },
+	            'Stop'
+	          )
 	        )
 	      );
 	    }
@@ -20565,6 +20598,25 @@
 	var Timer = function (_Component) {
 	  _inherits(Timer, _Component);
 
+	  _createClass(Timer, null, [{
+	    key: 'propTypes',
+	    get: function get() {
+	      return {
+	        limit: _react2.default.PropTypes.number.isRequired,
+	        onLimit: _react2.default.PropTypes.func,
+	        onTick: _react2.default.PropTypes.func
+	      };
+	    }
+	  }, {
+	    key: 'defaultProps',
+	    get: function get() {
+	      return {
+	        onLimit: function onLimit() {},
+	        onTick: function onTick() {}
+	      };
+	    }
+	  }]);
+
 	  function Timer(props) {
 	    _classCallCheck(this, Timer);
 
@@ -20591,15 +20643,19 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'time',
-	          null,
-	          '@',
-	          humanizeTime
+	          'div',
+	          { className: 'logo second-hand' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Builderscon'
+	          ),
+	          _react2.default.createElement('img', { src: '/logo-flat.png', style: style })
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'logo second-hand', style: style },
-	          _react2.default.createElement('img', { src: 'http://builderscon.io/assets/images/hex_logo.png' })
+	          'time',
+	          null,
+	          humanizeTime
 	        )
 	      );
 	    }
@@ -20636,7 +20692,7 @@
 
 	      this.props.onTick(past);
 
-	      if (past > this.props.limit) {
+	      if (past >= this.props.limit) {
 	        this.handleLimit();
 	      }
 	    }
@@ -20665,6 +20721,30 @@
 
 /***/ },
 /* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'toolbar' },
+	    props.children
+	  );
+	};
+
+/***/ },
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

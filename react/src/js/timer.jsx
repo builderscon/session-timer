@@ -36,10 +36,11 @@ export default class Timer extends Component {
 
     return (
       <div>
-        <time>@{humanizeTime}</time>
-        <div className = "logo second-hand" style={style}>
-          <img src = "http://builderscon.io/assets/images/hex_logo.png" />
+        <div className='logo second-hand'>
+          <h1>Builderscon</h1>
+          <img src='/logo-flat.png' style={style}/>
         </div>
+        <time>{humanizeTime}</time>
       </div>
     )
   }

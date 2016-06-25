@@ -8,11 +8,11 @@ const se = 'http://jsrun.it/assets/f/S/f/q/fSfqC.mp3'
 
 // 
 const choices = {
-  60: '60秒',
-  300: '5分',
-  900: '15分',
-  1800: '30分',
-  3600: '60分'
+  60: '01:00',
+  300: '05:00',
+  900: '15:00',
+  1800: '30:00',
+  3600: '60:00'
 }
 
 ReactDOM.render(<App sound={se} choices={choices}/>, document.getElementById('timer'))

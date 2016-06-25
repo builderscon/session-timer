@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import Config from './config'
 import Timer from './timer'
+import Toolbar from './toolbar'
 import SE from './se'
 
 export default class App extends Component {
@@ -19,9 +20,11 @@ export default class App extends Component {
       <div className={'rest-time ' + this.state.restTimeClassName}>
         <SE ref="se" sound={this.props.sound} />
         <Timer ref="timer" limit={this.state.limit} onTick={this.handleTick.bind(this)} onLimit={this.handleLimit.bind(this)} />
-        <Config choices={this.props.choices} onChange={this.handleChangeLimit.bind(this)} />
-        <button onClick={this.handleClickStart.bind(this)}>Start</button>
-        <button onClick={this.handleClickStop.bind(this)}>Stop</button>
+        <Toolbar>
+          <button onClick={this.handleClickStart.bind(this)}>Start</button>
+          <Config choices={this.props.choices} onChange={this.handleChangeLimit.bind(this)} />
+          <button onClick={this.handleClickStop.bind(this)}>Stop</button>
+        </Toolbar>
       </div>
     )
   }
