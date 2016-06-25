@@ -12,7 +12,8 @@ export default class App extends Component {
 
     this.state = {
       limit: +Object.keys(props.choices)[0],
-      restTimeClassName: ''
+      restTimeClassName: '',
+      running: false
     }
   }
 
@@ -23,8 +24,8 @@ export default class App extends Component {
         <SE ref="se" sound={this.props.sound} />
         <Timer ref="timer" limit={this.state.limit} onTick={this.handleTick.bind(this)} onLimit={this.handleLimit.bind(this)} />
         <Toolbar>
-          <button onClick={this.handleClickStart.bind(this)}>Start</button>
-          <Config choices={this.props.choices} onChange={this.handleChangeLimit.bind(this)} />
+          <button disabled={this.state.running} onClick={this.handleClickStart.bind(this)}>Start</button>
+          <Config disabled={this.state.running} choices={this.props.choices} onChange={this.handleChangeLimit.bind(this)} />
           <button onClick={this.handleClickStop.bind(this)}>Stop</button>
         </Toolbar>
       </div>
@@ -33,10 +34,12 @@ export default class App extends Component {
 
   handleClickStart() {
     this.refs.timer.start();
+    this.setState({ running: true })
   }
 
   handleClickStop() {
     this.refs.timer.stop();
+    this.setState({ running: false })
   }
 
   handleChangeLimit(limit) {

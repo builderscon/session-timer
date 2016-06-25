@@ -83,9 +83,10 @@ export default class Timer extends Component {
   }
 
   stop() {
-    this.setState({
-      past: 0
-    })
     clearInterval(this.state.timeoutID)
+    this.setState({
+      past: 0,
+      timeoutID: -1
+    })
   }
 }

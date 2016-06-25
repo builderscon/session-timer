@@ -71,6 +71,10 @@ nav a {
   font-weight: bold;
   font-size: 36px;
 }
+.toolbar select[disabled],
+.toolbar button[disabled] {
+  opacity: 0.3;
+}
 // http://stackoverflow.com/questions/10813528/is-it-possible-to-center-text-in-select-box
 .toolbar select {
   text-indent: 12px;
