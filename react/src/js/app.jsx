@@ -33,12 +33,12 @@ export default class App extends Component {
   }
 
   handleClickStart() {
-    this.refs.timer.start();
+    this.refs.timer.start()
     this.setState({ running: true })
   }
 
   handleClickStop() {
-    this.refs.timer.stop();
+    this.refs.timer.stop()
     this.setState({ running: false })
   }
 
