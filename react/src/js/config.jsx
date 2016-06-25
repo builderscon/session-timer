@@ -1,10 +1,10 @@
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
-export default class Config extends Component {
+class Config extends Component {
   render() {
     return (
-      <select onChange={this.handleChange.bind(this)}>
+      <select disabled={this.props.disabled} onChange={this.handleChange.bind(this)}>
         {Object.keys(this.props.choices).map((seconds) =>
           <option key={seconds} value={seconds}>{this.props.choices[seconds]}</option>
         )}
@@ -16,3 +16,14 @@ export default class Config extends Component {
     this.props.onChange(+e.currentTarget.value)
   }
 }
+
+Config.propTypes = {
+  disabled: PropTypes.bool,
+  choices: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired
+}
+Config.defaultProps = {
+  disabled: false
+}
+
+export default Config

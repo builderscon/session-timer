@@ -20421,7 +20421,8 @@
 
 	    _this.state = {
 	      limit: +Object.keys(props.choices)[0],
-	      restTimeClassName: ''
+	      restTimeClassName: '',
+	      running: false
 	    };
 	    return _this;
 	  }
@@ -20440,10 +20441,10 @@
 	          null,
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.handleClickStart.bind(this) },
+	            { disabled: this.state.running, onClick: this.handleClickStart.bind(this) },
 	            'Start'
 	          ),
-	          _react2.default.createElement(_config2.default, { choices: this.props.choices, onChange: this.handleChangeLimit.bind(this) }),
+	          _react2.default.createElement(_config2.default, { disabled: this.state.running, choices: this.props.choices, onChange: this.handleChangeLimit.bind(this) }),
 	          _react2.default.createElement(
 	            'button',
 	            { onClick: this.handleClickStop.bind(this) },
@@ -20456,11 +20457,13 @@
 	    key: 'handleClickStart',
 	    value: function handleClickStart() {
 	      this.refs.timer.start();
+	      this.setState({ running: true });
 	    }
 	  }, {
 	    key: 'handleClickStop',
 	    value: function handleClickStop() {
 	      this.refs.timer.stop();
+	      this.setState({ running: false });
 	    }
 	  }, {
 	    key: 'handleChangeLimit',
@@ -43909,7 +43912,7 @@
 
 	      return _react2.default.createElement(
 	        'select',
-	        { onChange: this.handleChange.bind(this) },
+	        { disabled: this.props.disabled, onChange: this.handleChange.bind(this) },
 	        Object.keys(this.props.choices).map(function (seconds) {
 	          return _react2.default.createElement(
 	            'option',
@@ -43928,6 +43931,15 @@
 
 	  return Config;
 	}(_react.Component);
+
+	Config.propTypes = {
+	  disabled: _react.PropTypes.bool,
+	  choices: _react.PropTypes.object.isRequired,
+	  onChange: _react.PropTypes.func.isRequired
+	};
+	Config.defaultProps = {
+	  disabled: false
+	};
 
 	exports.default = Config;
 
@@ -44067,10 +44079,11 @@
 	  }, {
 	    key: 'stop',
 	    value: function stop() {
-	      this.setState({
-	        past: 0
-	      });
 	      clearInterval(this.state.timeoutID);
+	      this.setState({
+	        past: 0,
+	        timeoutID: -1
+	      });
 	    }
 	  }]);
 
