@@ -42,7 +42,7 @@ export default class CircularTimer extends Component {
     render () {
         return (
             <Progress.Circle
-                size={285}
+                size={310}
                 progress={this.props.progress}
                 unfilledColor={this.circleColor}
                 color={'#eeeeee'}
