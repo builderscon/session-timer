@@ -20576,7 +20576,7 @@
 	        _react2.default.createElement(
 	          'a',
 	          { href: '#', onClick: this.handleClickModal.bind(this) },
-	          'Term of use'
+	          'Terms of use'
 	        ),
 	        _react2.default.createElement(
 	          'a',
@@ -20597,7 +20597,7 @@
 	            _react2.default.createElement(
 	              'h3',
 	              null,
-	              'Term of service'
+	              'Terms of use'
 	            ),
 	            _react2.default.createElement(
 	              'p',
@@ -20606,7 +20606,7 @@
 	              _react2.default.createElement(
 	                'a',
 	                { href: './tos.txt', target: '_blank' },
-	                'Term of service'
+	                'Terms of use'
 	              )
 	            ),
 	            _react2.default.createElement(
