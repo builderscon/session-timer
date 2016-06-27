@@ -1,4 +1,4 @@
-package com.sessiontimer;
+package com.builderscon.sessiontimer;
 
 import com.facebook.react.ReactActivity;
 import com.zmxv.RNSound.RNSoundPackage;
