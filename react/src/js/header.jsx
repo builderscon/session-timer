@@ -21,15 +21,15 @@ export default class Header extends Component {
   render() {
     return (
       <nav>
-        <a href="#" onClick={this.handleClickModal.bind(this)}>Term of use</a>
+        <a href="#" onClick={this.handleClickModal.bind(this)}>Terms of use</a>
         <a href="https://github.com/builderscon/session-timer" target="_blank">Github</a>
         {this.state.termModalOpen &&
           <ModalContainer>
             <ModalDialog className="modal" onClose={this.handleModalClose.bind(this)}>
               <h2>Builderscon session timer</h2>
 
-              <h3>Term of service</h3>
-              <p>Please read it using the following link: <a href="./tos.txt" target="_blank">Term of service</a></p>
+              <h3>Terms of use</h3>
+              <p>The terms of use are available at: <a href="./tos.txt" target="_blank">Terms of use</a></p>
 
               <h3>License</h3>
               <p><a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></p>
