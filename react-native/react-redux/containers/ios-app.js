@@ -130,9 +130,8 @@ class App extends Component {
     get textColor () {
         return this.props.state.running ? '#222222' : '#777777'
     }
-    //TODO: disable the reset button when timer is runnning
     get resetButtonColor () {
-        return this.props.state.running ? '#aaaaaa' : '#aaaaaa'
+        return this.props.state.running ? '#aaaaaa' : '#555555'
     }
     get toggleButtonColor () {
         return this.props.state.running ? '#ea5432' : '#5db7e8'
@@ -181,7 +180,7 @@ class App extends Component {
                 </View>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
-                        <TouchableHighlight onPress={actions.reset}>
+                        <TouchableHighlight onPress={() => {state.running || actions.reset()}}>
                             <Text style={[styles.resetButton, {backgroundColor: this.resetButtonColor}]}>Reset</Text>
                         </TouchableHighlight>
                     </View>

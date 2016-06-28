@@ -21,17 +21,12 @@ export default class NotificatableTimer {
     }
 
     reset () {
-        if (this.on) {
-            return
-        }
         this.consumed = 0
         this.duration = 0
-        this.on = false
     }
 
     start () {
         this.base = new Date()
-        this.on = true
         this.setupTerminater()
         this.setupNotifications()
         this.setupInterval()
@@ -68,7 +63,6 @@ export default class NotificatableTimer {
 
     stop () {
         this.consumed += (new Date() - this.base)
-        this.on = false
         clearInterval(this.intervalId)
         clearInterval(this.terminater.timeoutId)
         this.notifications.timeoutIds.forEach((timeoutId) => {
