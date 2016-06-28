@@ -2,9 +2,10 @@
 
 import * as types from './types'
 
-export function sync () {
+export function sync (timer) {
     return {
-        type: types.SYNC
+        type: types.SYNC,
+        progress: timer.elapsed / timer.total,
     }
 }
 

@@ -22,7 +22,7 @@ export default class NotificatableTimer {
 
     reset () {
         this.consumed = 0
-        this.duration = 0
+        this.elapsed = 0
     }
 
     start () {
@@ -53,11 +53,11 @@ export default class NotificatableTimer {
 
     setupInterval () {
         this.intervalId = setInterval(() => {
-            let duration = new Date() - this.base + this.consumed
-            if (this.total < duration) {
-                duration = this.total
+            let elapsed = new Date() - this.base + this.consumed
+            if (this.total < elapsed) {
+                elapsed = this.total
             }
-            this.duration = duration
+            this.elapsed = elapsed
         }, this.interval)
     }
 

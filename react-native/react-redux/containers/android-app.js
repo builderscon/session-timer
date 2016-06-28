@@ -15,6 +15,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import CircularTimer from '../components/circular-timer'
 import * as actions from '../actions/creators'
+import NotificatableTimer from '../../domain/notification-timer'
+import presets from '../../domain/presets'
 
 const FPS = 10
 
@@ -22,6 +24,7 @@ function zeroPadding (n) {
     return ('0' + n.toString()).slice(-2)
 }
 
+const timer = new NotificatableTimer(presets.sixty)
 class App extends Component {
     constructor (props) {
         super(props)
@@ -29,15 +32,23 @@ class App extends Component {
     }
 
     start () {
+        timer.start()
         const { actions } = this.props
         actions.start()
-        this.intervalId = setInterval(actions.sync, 1000 / FPS)
+        this.intervalId = setInterval(() => actions.sync(timer), 1000 / FPS)
     }
 
     stop () {
+        timer.stop()
         const { actions } = this.props
         actions.stop()
         clearInterval(this.intervalId)
+    }
+
+    reset() {
+        const { actions } = this.props
+        actions.reset()
+        timer.reset()
     }
 
     get iconName () {
@@ -71,7 +82,7 @@ class App extends Component {
 
     get remainingText () {
         const { state } = this.props
-        const total = state.timer.total
+        const total = timer.total
         const progress = state.progress
         const remaining = (total * (1 - progress)) / 1000
         const remainingMinutes = Math.floor(remaining / 60)
@@ -114,7 +125,7 @@ class App extends Component {
                 </View>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
-                        <TouchableHighlight onPress={() => {state.running || actions.reset()}}>
+                        <TouchableHighlight onPress={() => {state.running || this.reset()}}>
                             <Text style={[styles.resetButton, {backgroundColor: this.resetButtonColor}]}>Reset</Text>
                         </TouchableHighlight>
                     </View>
