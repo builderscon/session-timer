@@ -24,6 +24,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		16488D221D21F7F300E60E9B /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16488D211D21F7DA00E60E9B /* libRNSound.a */; };
+		1677A54A1D220CD1001369C1 /* tin2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1677A5491D220CD1001369C1 /* tin2.mp3 */; };
 		16F9B8F41D21F92800F00838 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F9B8E71D21F91900F00838 /* libART.a */; };
 		381CD7BBCC4D4E429A63F084 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29F48BF379FF4B08AEA4D93B /* Zocial.ttf */; };
 		568CBB84132C4320AC13F19B /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3DDBB3DF31949B5B8A65BA4 /* Foundation.ttf */; };
@@ -159,6 +160,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SessionTimer/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		16488D121D21F7DA00E60E9B /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
+		1677A5491D220CD1001369C1 /* tin2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tin2.mp3; path = ../resources/tin2.mp3; sourceTree = "<group>"; };
 		16F9B8E21D21F91900F00838 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		19DF876BE73D4CB6998F43D3 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		1D5AB77269004A36820374D6 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 		F182269F59624B719296B704 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1677A5491D220CD1001369C1 /* tin2.mp3 */,
 				ECABF398CAFD43FB9CD40F7C /* Entypo.ttf */,
 				2E60BF24720F4E5BBA0346E6 /* EvilIcons.ttf */,
 				CFB5C64EB6E747AF8B564E80 /* FontAwesome.ttf */,
@@ -442,7 +445,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 610;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -630,6 +633,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1677A54A1D220CD1001369C1 /* tin2.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				A3992FCA1BD444339B874950 /* Entypo.ttf in Resources */,
@@ -718,6 +722,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.builderscon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SessionTimer.app/SessionTimer";
 			};
@@ -735,6 +740,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.builderscon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SessionTimer.app/SessionTimer";
 			};
@@ -805,6 +811,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
