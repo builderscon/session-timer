@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     text: {
-        top: -(base / 1.8),
+        top: -(base / 2),
         fontFamily: 'avenir',
         fontSize: base / 5,
         fontWeight: 'bold',
@@ -120,7 +120,16 @@ class App extends Component {
     constructor (props) {
         super(props)
         this.index = 0
-        this.timer = new NotificatableTimer(presets[0])
+        this.presets = presets.map((preset) => {
+            const original = preset.terminateCallback
+            preset.terminateCallback = () => {
+                original()
+                this.stop()
+                this.props.actions.terminate()
+            }
+            return preset
+        })
+        this.timer = new NotificatableTimer(this.presets[this.index])
     }
 
     start () {
@@ -132,24 +141,23 @@ class App extends Component {
 
     stop () {
         this.timer.stop()
-        const { actions } = this.props
-        actions.stop()
+        this.props.actions.stop()
         clearInterval(this.intervalId)
     }
 
     reset() {
-        const { actions } = this.props
-        actions.reset()
+        this.props.actions.reset()
         this.timer.reset()
     }
 
     togglePresets() {
         ++this.index
-        if (presets.length <= this.index) {
+        if (this.presets.length <= this.index) {
             this.index = 0
         }
-        this.timer = new NotificatableTimer(presets[this.index])
+        this.timer = new NotificatableTimer(this.presets[this.index])
         const { actions } = this.props
+        actions.reset()
         actions.sync(this.timer)
     }
 
@@ -158,22 +166,24 @@ class App extends Component {
     }
 
     get iconName () {
-        return this.props.state.running ? 'play': 'pause'
+        return this.props.state.isRunning ? 'play': 'pause'
     }
     get iconColor () {
-        return this.props.state.running ? '#222222' : '#777777'
+        return this.props.state.isRunning ? '#222222' : '#777777'
     }
     get textColor () {
-        return this.props.state.running ? '#222222' : '#777777'
+        return this.props.state.isRunning ? '#222222' : '#777777'
     }
     get resetButtonColor () {
-        return this.props.state.running ? '#aaaaaa' : '#555555'
+        return this.props.state.isRunning ? '#aaaaaa' : '#555555'
     }
     get toggleButtonColor () {
-        return this.props.state.running ? '#ea5432' : '#5db7e8'
+        return this.props.state.isReady
+            ? this.props.state.isRunning ? '#ea5432' : '#5db7e8'
+            : '#aaaaaa'
     }
     get toggleButtonText () {
-        return this.props.state.running ? 'Stop': 'Start'
+        return this.props.state.isRunning ? 'Stop': 'Start'
     }
 
     get remainingText () {
@@ -198,7 +208,7 @@ class App extends Component {
                                 style={styles.logo}
                             />
                         </TouchableHighlight>
-                        <TouchableHighlight style={styles.presetButton} onPress={() => {state.running || this.togglePresets()}}>
+                        <TouchableHighlight style={styles.presetButton} onPress={() => {state.isRunning || this.togglePresets()}}>
                             <Text style={styles.presetText}>Preset</Text>
                         </TouchableHighlight>
                     </View>
@@ -214,18 +224,18 @@ class App extends Component {
                     <CircularTimer
                         total={this.timer.total}
                         progress={state.progress}
-                        running={state.running}
+                        isRunning={state.isRunning}
                     />
                     <Text style={[styles.text, {color: this.textColor}]}>{this.remainingText}</Text>
                 </View>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
-                        <TouchableHighlight onPress={() => {state.running || this.reset()}}>
+                        <TouchableHighlight onPress={() => {state.isRunning || this.reset()}}>
                             <Text style={[styles.resetButton, {backgroundColor: this.resetButtonColor}]}>Reset</Text>
                         </TouchableHighlight>
                     </View>
                     <View style={styles.button}>
-                        <TouchableHighlight onPress={() => state.running ? this.stop(): this.start()}>
+                        <TouchableHighlight onPress={() => state.isReady && (state.isRunning ? this.stop(): this.start())}>
                             <Text style={[styles.toggleButton, {backgroundColor: this.toggleButtonColor}]}>{this.toggleButtonText}</Text>
                         </TouchableHighlight>
                     </View>

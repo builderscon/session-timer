@@ -21,10 +21,10 @@ export default class CircularTimer extends Component {
     }
 
     get circleColor () {
-        return this.props.running ? '#5db7e8' : '#ea5432'
+        return this.props.isRunning ? '#5db7e8' : '#ea5432'
     }
     get textColor () {
-        return this.props.running ? '#222222' : '#777777'
+        return this.props.isRunning ? '#222222' : '#777777'
     }
 
     render () {

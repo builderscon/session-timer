@@ -7,7 +7,8 @@ import {
 
 const initialState = {
     progress: 0,
-    running: false,
+    isRunning: false,
+    isReady: true,
 }
 
 export default function timer(state = initialState, action = {}) {
@@ -20,17 +21,23 @@ export default function timer(state = initialState, action = {}) {
         case types.START:
             return {
                 ...state,
-                running: true,
+                isRunning: true,
             }
         case types.STOP:
             return {
                 ...state,
-                running: false,
+                isRunning: false,
             }
         case types.RESET:
             return {
                 ...state,
                 progress: 0,
+                isReady: true,
+            }
+        case types.TERMINATE:
+            return {
+                ...state,
+                isReady: false,
             }
         default:
             return state

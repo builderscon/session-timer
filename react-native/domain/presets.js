@@ -81,13 +81,13 @@ const presets = [
         },
         notifications: [
             {
-                at: 55 * 1000,
+                at: 20 * 1000,
                 callback: () => {
                     ting.play()
                 },
             },
             {
-                at: 50 * 1000,
+                at: 10 * 1000,
                 callback: () => {
                     twiceTing()
                 },

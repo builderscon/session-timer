@@ -26,3 +26,9 @@ export function reset () {
         type: types.RESET
     }
 }
+
+export function terminate() {
+    return {
+        type: types.TERMINATE
+    }
+}
