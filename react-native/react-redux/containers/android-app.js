@@ -111,15 +111,18 @@ class App extends Component {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
-                <View style={styles.topView}>
-                    <View style={styles.preset}>
-                        <TouchableHighlight style={styles.copyrightButton} onPress={() => this.showCopyright()}>
+                <View style={styles.header}>
+                    <View style={styles.copyright}>
+                        <TouchableHighlight onPress={() => this.showCopyright()}>
                             <Image
                                 source={require('../../resources/images/hex_logo.png')}
                                 style={styles.logo}
                             />
                         </TouchableHighlight>
-                        <TouchableHighlight style={styles.presetButton} onPress={() => {state.running || this.togglePresets()}}>
+                    </View>
+                    <View style={{flex: 3}} />
+                    <View style={styles.preset}>
+                        <TouchableHighlight onPress={() => {state.running || this.togglePresets()}}>
                             <Text style={styles.presetText}>Preset</Text>
                         </TouchableHighlight>
                     </View>
@@ -223,37 +226,33 @@ const styles = StyleSheet.create({
         fontFamily: 'avenir',
         fontWeight: 'bold',
     },
-    topView: {
-        flex: 1,
+    header: {
+        flex: 0.5,
         flexDirection: 'row',
         justifyContent: 'flex-end',
     },
+    copyright: {
+        flex: 2,
+        backgroundColor: '#444',
+        borderRadius: 36,
+        right: 20,
+    },
     logo: {
-        left: 20,
-        top: 10,
         alignSelf: 'flex-start',
         width: 50,
         height: 50,
-    },
-    copyrightButton: {
-        right: 10,
+        left: 20,
     },
     preset: {
-        left: 40,
-        width: 250,
-        height: 70,
+        flex: 5,
         backgroundColor: '#444',
-        flexDirection: 'row',
-        borderRadius: 35
-    },
-    presetButton: {
-        left: 30,
+        borderRadius: 36,
+        left: 20,
     },
     presetText: {
         fontFamily: 'avenir',
         color: '#fff',
         fontSize: 36,
-        paddingTop: 16,
         alignSelf: 'center',
         textAlign: 'center',
         textAlignVertical: 'center',

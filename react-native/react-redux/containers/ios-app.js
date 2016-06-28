@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         height: 70,
         backgroundColor: '#444',
         flexDirection: 'row',
-        borderRadius: 35
+        borderRadius: 35,
     },
     presetButton: {
         left: 30,
