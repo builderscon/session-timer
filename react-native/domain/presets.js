@@ -10,7 +10,7 @@ const ting = new Sound(SOUND_FILE_NAME, Sound.MAIN_BUNDLE, (error) => {
 })
 
 function twiceTing () {
-    const DELAY = 180
+    const DELAY = 300
     ting.play()
     const timeoutId = setTimeout(() => {
         ting.stop()
