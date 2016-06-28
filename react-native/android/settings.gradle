@@ -1,4 +1,4 @@
-rootProject.name = 'App'
+rootProject.name = 'SessionTimer'
 
 include ':app'
 include ':RNSound'

@@ -1,4 +1,4 @@
-package com.app;
+package io.builderscon.sessiontimer;
 
 import com.facebook.react.ReactActivity;
 import com.zmxv.RNSound.RNSoundPackage;
@@ -17,7 +17,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "App";
+        return "SessionTimer";
     }
 
     /**

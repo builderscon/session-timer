@@ -3,4 +3,4 @@
 import { AppRegistry } from 'react-native'
 import Container from './containers/android-container'
 
-AppRegistry.registerComponent('App', () => Container)
+AppRegistry.registerComponent('SessionTimer', () => Container)
