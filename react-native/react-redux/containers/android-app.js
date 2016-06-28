@@ -94,6 +94,7 @@ class App extends Component {
                     </View>
                 </View>
                 <View style={styles.timer}>
+                    <View style={{marginTop: 64}} />
                     <Animated.Image
                         source={require('../../resources/images/hex_base.png')}
                         style={[styles.hex, {transform: [{
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#eeeeee',
     },
     timer: {
-        flex: 5,
+        flex: 4,
         justifyContent: 'center',
         alignSelf: 'center',
     },
