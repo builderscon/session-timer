@@ -16,6 +16,10 @@ import * as actions from '../actions/creators'
 
 const FPS = 60
 
+function zeroPadding (n) {
+    return ('0' + n.toString()).slice(-2)
+}
+
 class App extends Component {
     constructor (props) {
         super(props)
@@ -39,6 +43,9 @@ class App extends Component {
     get iconColor () {
         return this.props.state.running ? '#222222' : '#777777'
     }
+    get textColor () {
+        return this.props.state.running ? '#222222' : '#777777'
+    }
     //TODO: disable the reset button when timer is runnning
     get resetButtonColor () {
         return this.props.state.running ? '#aaaaaa' : '#aaaaaa'
@@ -48,6 +55,16 @@ class App extends Component {
     }
     get toggleButtonText () {
         return this.props.state.running ? 'Stop': 'Start'
+    }
+
+    get remainingText () {
+        const { state } = this.props
+        const total = state.timer.total
+        const progress = state.progress
+        const remaining = (total * (1 - progress)) / 1000
+        const remainingMinutes = Math.floor(remaining / 60)
+        const remainingSeconds = Math.floor(remaining % 60)
+        return zeroPadding(remainingMinutes) + ':' + zeroPadding(remainingSeconds)
     }
 
     render () {
@@ -76,6 +93,7 @@ class App extends Component {
                         progress={state.progress}
                         running={state.running}
                     />
+                    <Text style={[styles.text, {color: this.textColor}]}>{this.remainingText}</Text>
                 </View>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
@@ -108,6 +126,14 @@ const styles = StyleSheet.create({
     },
     icon: {
         top: 85,
+        alignSelf: 'center',
+        textAlign: 'center',
+    },
+    text: {
+        top: -200,
+        fontFamily: 'avenir',
+        fontSize: 70,
+        fontWeight: 'bold',
         alignSelf: 'center',
         textAlign: 'center',
     },
