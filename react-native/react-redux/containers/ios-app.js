@@ -13,12 +13,96 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import CircularTimer from '../components/circular-timer'
 import * as actions from '../actions/creators'
+import Device from '../lib/device'
 
 const FPS = 60
 
 function zeroPadding (n) {
     return ('0' + n.toString()).slice(-2)
 }
+
+const base = Device.shorter
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'stretch',
+        backgroundColor: '#eeeeee',
+    },
+    timer: {
+        flex: 4,
+        justifyContent: 'center',
+        alignSelf: 'center',
+    },
+    icon: {
+        top: base / 3.5,
+        alignSelf: 'center',
+        textAlign: 'center',
+    },
+    text: {
+        top: -(base / 1.8),
+        fontFamily: 'avenir',
+        fontSize: base / 5,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        textAlign: 'center',
+    },
+    buttons: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    button: {
+        alignItems: 'stretch',
+        justifyContent: 'flex-end',
+        flex: 1,
+    },
+    resetButton: {
+        height: 100,
+        paddingTop: 20,
+        textAlign: 'center',
+        color: '#eeeeee',
+        fontSize: 40,
+        fontFamily: 'avenir',
+        fontWeight: 'bold',
+    },
+    toggleButton: {
+        height: 100,
+        paddingTop: 20,
+        textAlign: 'center',
+        color: '#eeeeee',
+        fontSize: 40,
+        fontFamily: 'avenir',
+        fontWeight: 'bold',
+    },
+    topView: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
+    logo: {
+        left: 20,
+        top: 10,
+        alignSelf: 'flex-start',
+        width: 50,
+        height: 50,
+    },
+    rec: {
+        left: 40,
+        top: 20,
+        width: 250,
+        height: 70,
+        backgroundColor: '#444',
+        flexDirection: 'row',
+        borderRadius: 35
+    },
+    setting: {
+        left: 30,
+        fontFamily: 'avenir',
+        color: '#fff',
+        fontSize: 35,
+        alignSelf: 'center'
+    }
+})
 
 class App extends Component {
     constructor (props) {
@@ -84,7 +168,7 @@ class App extends Component {
                     <Text style={styles.icon}>
                         <Icon
                             name={this.iconName}
-                            size={40}
+                            size={base / 6}
                             color={this.iconColor}
                         />
                     </Text>
@@ -111,88 +195,6 @@ class App extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'stretch',
-        backgroundColor: '#eeeeee',
-    },
-    timer: {
-        flex: 4,
-        justifyContent: 'center',
-        alignSelf: 'center',
-    },
-    icon: {
-        top: 85,
-        alignSelf: 'center',
-        textAlign: 'center',
-    },
-    text: {
-        top: -200,
-        fontFamily: 'avenir',
-        fontSize: 70,
-        fontWeight: 'bold',
-        alignSelf: 'center',
-        textAlign: 'center',
-    },
-    buttons: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    button: {
-        alignItems: 'stretch',
-        justifyContent: 'flex-end',
-        flex: 1,
-    },
-    resetButton: {
-        height: 100,
-        paddingTop: 20,
-        textAlign: 'center',
-        color: '#eeeeee',
-        fontSize: 40,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
-    },
-    toggleButton: {
-        height: 100,
-        paddingTop: 20,
-        textAlign: 'center',
-        color: '#eeeeee',
-        fontSize: 40,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
-    },
-    topView: {
-        flex: 0.7,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-    },
-    logo: {
-        left: 20,
-        top: 10,
-        alignSelf: 'flex-start',
-        width: 50,
-        height: 50,
-    },
-    rec: {
-        left: 40,
-        top: 20,
-        width: 250,
-        height: 70,
-        backgroundColor: '#444',
-        flexDirection: 'row',
-        borderRadius: 35
-    },
-    setting: {
-        left: 30,
-        fontFamily: 'avenir',
-        color: '#fff',
-        fontSize: 35,
-        alignSelf: 'center'
-    }
-})
 
 
 export default connect(state => ({

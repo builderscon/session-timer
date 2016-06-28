@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import * as Progress from 'react-native-progress'
+import Device from '../lib/device';
 
 const { PropTypes } = React
 
@@ -15,6 +16,8 @@ export default class CircularTimer extends Component {
 
     constructor(props) {
         super(props)
+
+        this.width = Device.shorter * 0.9
     }
 
     get circleColor () {
@@ -27,7 +30,7 @@ export default class CircularTimer extends Component {
     render () {
         return (
             <Progress.Circle
-                size={310}
+                size={this.width}
                 progress={this.props.progress}
                 unfilledColor={this.circleColor}
                 color={'#eeeeee'}
