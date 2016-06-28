@@ -4,10 +4,13 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
+    Animated,
+    Image,
     StyleSheet,
     Text,
     TouchableHighlight,
     View,
+    Easing,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import CircularTimer from '../components/circular-timer'
@@ -22,6 +25,7 @@ function zeroPadding (n) {
 class App extends Component {
     constructor (props) {
         super(props)
+        this.angle = new Animated.Value(0)
     }
 
     start () {
@@ -53,6 +57,19 @@ class App extends Component {
         return this.props.state.running ? 'Stop': 'Start'
     }
 
+    componentDidMount() {
+        // this._animate()
+    }
+
+    _animate() {
+        this.angle.setValue(0)
+        this.animation = Animated.timing(this.angle, {
+            toValue: 360,
+            duration: 60000,
+            easing: Easing.linear,
+        }).start(() => this._animate())
+    }
+
     get remainingText () {
         const { state } = this.props
         const total = state.timer.total
@@ -67,7 +84,26 @@ class App extends Component {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
+                <View style={styles.topView}>
+                    <View style={styles.rec}>
+                        <Image
+                            source={require('../../resources/images/hex_logo.png')}
+                            style={styles.logo}
+                        />
+                        <Text style={styles.setting}>Setting</Text>
+                    </View>
+                </View>
                 <View style={styles.timer}>
+                    <View style={{marginTop: 64}} />
+                    <Animated.Image
+                        source={require('../../resources/images/hex_base.png')}
+                        style={[styles.hex, {transform: [{
+                            rotate: this.angle.interpolate({
+                                inputRange: [0, 360],
+                                outputRange: ['0deg', '360deg'],
+                            })
+                        }]}]}
+                    />
                     <Text style={styles.icon}>
                         <Icon
                             name={this.iconName}
@@ -102,20 +138,27 @@ const styles = StyleSheet.create({
         backgroundColor: '#eeeeee',
     },
     timer: {
-        flex: 5,
+        flex: 4,
         justifyContent: 'center',
         alignSelf: 'center',
     },
     icon: {
+        top: -240,
         alignSelf: 'center',
         textAlign: 'center',
     },
     text: {
+        top: -220,
         fontSize: 64,
         fontFamily: 'avenir',
         fontWeight: 'bold',
         alignSelf: 'center',
         textAlign: 'center',
+    },
+    hex: {
+        alignSelf: 'flex-start',
+        width: 300,
+        height: 300,
     },
     buttons: {
         flex: 1,
@@ -146,6 +189,34 @@ const styles = StyleSheet.create({
         fontFamily: 'avenir',
         fontWeight: 'bold',
     },
+    topView: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
+    logo: {
+        left: 20,
+        top: 10,
+        alignSelf: 'flex-start',
+        width: 50,
+        height: 50,
+    },
+    rec: {
+        left: 40,
+        top: 20,
+        width: 250,
+        height: 70,
+        backgroundColor: '#444',
+        flexDirection: 'row',
+        borderRadius: 35
+    },
+    setting: {
+        left: 30,
+        fontFamily: 'avenir',
+        color: '#fff',
+        fontSize: 35,
+        alignSelf: 'center'
+    }
 })
 
 
