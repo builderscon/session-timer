@@ -9,6 +9,7 @@ import {
     StyleSheet,
     Text,
     TouchableHighlight,
+    TouchableWithoutFeedback,
     View,
     Easing,
 } from 'react-native'
@@ -123,15 +124,23 @@ class App extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.copyright}>
-                        <TouchableHighlight onPress={() => this.showCopyright()}>
-                            <Image source={{uri: 'hex_logo'}} style={styles.logo} />
-                        </TouchableHighlight>
+                        <TouchableWithoutFeedback
+                            activeOpacity={0}
+                            onPress={() => this.showCopyright()}>
+                            <View>
+                                <Image source={{uri: 'hex_logo'}} style={styles.logo} />
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
                     <View style={{flex: 3}} />
                     <View style={styles.preset}>
-                        <TouchableHighlight onPress={() => {state.isRunning || this.togglePresets()}}>
-                            <Text style={styles.presetText}>Preset</Text>
-                        </TouchableHighlight>
+                        <TouchableWithoutFeedback
+                            activeOpacity={0}
+                            onPress={() => {state.isRunning || this.togglePresets()}}>
+                            <View>
+                                <Text style={styles.presetText}>Preset</Text>
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
                 </View>
                 <View style={styles.timer}>

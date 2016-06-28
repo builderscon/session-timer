@@ -8,6 +8,7 @@ import {
     StyleSheet,
     Text,
     TouchableHighlight,
+    TouchableWithoutFeedback,
     View,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -202,12 +203,21 @@ class App extends Component {
             <View style={styles.container}>
                 <View style={styles.topView}>
                     <View style={styles.preset}>
-                        <TouchableHighlight onPress={() => this.showCopyright()}>
-                            <Image source={{uri: 'hex_logo'}} style={styles.logo} />
-                        </TouchableHighlight>
-                        <TouchableHighlight style={styles.presetButton} onPress={() => {state.isRunning || this.togglePresets()}}>
-                            <Text style={styles.presetText}>Preset</Text>
-                        </TouchableHighlight>
+                        <TouchableWithoutFeedback
+                            activeOpacity={1}
+                            onPress={() => this.showCopyright()}>
+                            <View>
+                                <Image source={{uri: 'hex_logo'}} style={styles.logo} />
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback
+                            activeOpacity={1}
+                            style={styles.presetButton}
+                            onPress={() => {state.isRunning || this.togglePresets()}}>
+                            <View>
+                                <Text style={styles.presetText}>Preset</Text>
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
                 </View>
                 <View style={styles.timer}>
