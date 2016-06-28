@@ -10,6 +10,7 @@ import {
     Text,
     TouchableHighlight,
     View,
+    Easing,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import CircularTimer from '../components/circular-timer'
@@ -24,8 +25,7 @@ function zeroPadding (n) {
 class App extends Component {
     constructor (props) {
         super(props)
-
-        this.anim = new Animated.Value(0);
+        this.angle = new Animated.Value(0)
     }
 
     start () {
@@ -57,6 +57,19 @@ class App extends Component {
         return this.props.state.running ? 'Stop': 'Start'
     }
 
+    componentDidMount() {
+        this._animate()
+    }
+
+    _animate() {
+        this.angle.setValue(0)
+        Animated.timing(this.angle, {
+            toValue: 360,
+            duration: 6000,
+            easing: Easing.linear,
+        }).start(() => this._animate())
+    }
+
     get remainingText () {
         const { state } = this.props
         const total = state.timer.total
@@ -72,9 +85,14 @@ class App extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.timer}>
-                    <Image
+                    <Animated.Image
                         source={require('../../resources/images/hex_base.png')}
-                        style={styles.hex}
+                        style={[styles.hex, {transform: [{
+                            rotate: this.angle.interpolate({
+                                inputRange: [0, 360],
+                                outputRange: ['0deg', '360deg'],
+                            })
+                        }]}]}
                     />
                     <Text style={styles.icon}>
                         <Icon
