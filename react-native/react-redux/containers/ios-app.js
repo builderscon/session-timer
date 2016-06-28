@@ -203,10 +203,7 @@ class App extends Component {
                 <View style={styles.topView}>
                     <View style={styles.preset}>
                         <TouchableHighlight onPress={() => this.showCopyright()}>
-                            <Image
-                                source={require('../../resources/images/hex_logo.png')}
-                                style={styles.logo}
-                            />
+                            <Image source={{uri: 'hex_logo'}} style={styles.logo} />
                         </TouchableHighlight>
                         <TouchableHighlight style={styles.presetButton} onPress={() => {state.isRunning || this.togglePresets()}}>
                             <Text style={styles.presetText}>Preset</Text>

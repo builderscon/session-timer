@@ -124,10 +124,7 @@ class App extends Component {
                 <View style={styles.header}>
                     <View style={styles.copyright}>
                         <TouchableHighlight onPress={() => this.showCopyright()}>
-                            <Image
-                                source={require('../../resources/images/hex_logo.png')}
-                                style={styles.logo}
-                            />
+                            <Image source={{uri: 'hex_logo'}} style={styles.logo} />
                         </TouchableHighlight>
                     </View>
                     <View style={{flex: 3}} />
@@ -140,7 +137,7 @@ class App extends Component {
                 <View style={styles.timer}>
                     <View style={{marginTop: 64}} />
                     <Animated.Image
-                        source={require('../../resources/images/hex_base.png')}
+                        source={{uri: 'hex_base'}}
                         style={[styles.hex, {transform: [{
                             rotate: this.angle.interpolate({
                                 inputRange: [0, 360],
