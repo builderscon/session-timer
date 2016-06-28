@@ -24,22 +24,23 @@ function zeroPadding (n) {
     return ('0' + n.toString()).slice(-2)
 }
 
-const timer = new NotificatableTimer(presets.sixty)
 class App extends Component {
     constructor (props) {
         super(props)
+        this.index = 0
+        this.timer = new NotificatableTimer(presets[0])
         this.angle = new Animated.Value(0)
     }
 
     start () {
-        timer.start()
+        this.timer.start()
         const { actions } = this.props
         actions.start()
-        this.intervalId = setInterval(() => actions.sync(timer), 1000 / FPS)
+        this.intervalId = setInterval(() => actions.sync(this.timer), 1000 / FPS)
     }
 
     stop () {
-        timer.stop()
+        this.timer.stop()
         const { actions } = this.props
         actions.stop()
         clearInterval(this.intervalId)
@@ -48,7 +49,17 @@ class App extends Component {
     reset() {
         const { actions } = this.props
         actions.reset()
-        timer.reset()
+        this.timer.reset()
+    }
+
+    togglePresets() {
+        ++this.index
+        if (presets.length <= this.index) {
+            this.index = 0
+        }
+        this.timer = new NotificatableTimer(presets[this.index])
+        const { actions } = this.props
+        actions.sync(this.timer)
     }
 
     get iconName () {
@@ -82,7 +93,7 @@ class App extends Component {
 
     get remainingText () {
         const { state } = this.props
-        const total = timer.total
+        const total = this.timer.total
         const progress = state.progress
         const remaining = (total * (1 - progress)) / 1000
         const remainingMinutes = Math.floor(remaining / 60)
@@ -100,7 +111,9 @@ class App extends Component {
                             source={require('../../resources/images/hex_logo.png')}
                             style={styles.logo}
                         />
-                        <Text style={styles.setting}>Setting</Text>
+                        <TouchableHighlight style={styles.presetButton} onPress={() => {state.running || this.togglePresets()}}>
+                            <Text style={styles.presetText}>Preset</Text>
+                        </TouchableHighlight>
                     </View>
                 </View>
                 <View style={styles.timer}>
@@ -220,12 +233,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 35
     },
-    setting: {
+    presetButton: {
         left: 30,
+    },
+    presetText: {
         fontFamily: 'avenir',
         color: '#fff',
         fontSize: 35,
-        alignSelf: 'center'
+        paddingTop: 16,
+        alignSelf: 'center',
+        textAlign: 'center',
+        textAlignVertical: 'center',
     }
 })
 

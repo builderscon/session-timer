@@ -9,7 +9,7 @@ const ting = new Sound(SOUND_FILE_NAME, Sound.MAIN_BUNDLE, (error) => {
     }
 })
 
-function twiceTing (ting) {
+function twiceTing () {
     const DELAY = 180
     ting.play()
     const timeoutId = setTimeout(() => {
@@ -19,11 +19,37 @@ function twiceTing (ting) {
     }, DELAY)
 }
 
-const presets = {
-    sixty: {
+const presets = [
+    {
         total: 60 * 60 * 1000,
         terminateCallback: () => {
-            ting.play()
+            twiceTing()
+        },
+        notifications: [
+            {
+                at: 20 * 60 * 1000,
+                callback: () => {
+                    ting.play()
+                },
+            },
+            {
+                at: 15 * 60 * 1000,
+                callback: () => {
+                    ting.play()
+                },
+            },
+            {
+                at: 10 * 60 * 1000,
+                callback: () => {
+                    twiceTing()
+                },
+            },
+        ],
+    },
+    {
+        total: 30 * 60 * 1000,
+        terminateCallback: () => {
+            twiceTing()
         },
         notifications: [
             {
@@ -33,13 +59,41 @@ const presets = {
                 },
             },
             {
-                at: 5 * 60 * 1000,
+                at: 10 * 60 * 1000,
                 callback: () => {
-                    twiceTing(ting)
+                    twiceTing()
                 },
             },
         ],
     },
-}
+    {
+        total: 5 * 60 * 1000,
+        terminateCallback: () => {
+            twiceTing()
+        },
+        notifications: [
+        ],
+    },
+    {
+        total: 1 * 60 * 1000,
+        terminateCallback: () => {
+            twiceTing()
+        },
+        notifications: [
+            {
+                at: 55 * 1000,
+                callback: () => {
+                    ting.play()
+                },
+            },
+            {
+                at: 50 * 1000,
+                callback: () => {
+                    twiceTing()
+                },
+            },
+        ],
+    },
+]
 
 export default presets
