@@ -17,6 +17,7 @@
 {
   NSURL *jsCodeLocation;
 
+#ifdef DEBUG
   /**
    * Loading JavaScript code - uncomment the one you want.
    *
@@ -32,7 +33,7 @@
    */
 
   jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
-
+#else
   /**
    * OPTION 2
    * Load from pre-bundled file on disk. The static bundle is automatically
@@ -41,7 +42,8 @@
    * simulator in the "Release" build configuration.
    */
 
-//   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+#endif
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"SessionTimer"
