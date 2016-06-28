@@ -58,14 +58,14 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this._animate()
+        // this._animate()
     }
 
     _animate() {
         this.angle.setValue(0)
-        Animated.timing(this.angle, {
+        this.animation = Animated.timing(this.angle, {
             toValue: 360,
-            duration: 6000,
+            duration: 60000,
             easing: Easing.linear,
         }).start(() => this._animate())
     }
