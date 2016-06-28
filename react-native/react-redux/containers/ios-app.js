@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     icon: {
-        top: base / 3.5,
+        top: base / 4.0,
         alignSelf: 'center',
         textAlign: 'center',
     },
@@ -168,7 +168,7 @@ class App extends Component {
                     <Text style={styles.icon}>
                         <Icon
                             name={this.iconName}
-                            size={base / 6}
+                            size={base / 6.5}
                             color={this.iconColor}
                         />
                     </Text>
