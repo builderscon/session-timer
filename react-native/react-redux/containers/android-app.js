@@ -13,7 +13,9 @@ import {
     Easing,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Modal from 'react-native-modalbox'
 import CircularTimer from '../components/circular-timer'
+import Copyright from '../components/copyright'
 import * as actions from '../actions/creators'
 import NotificatableTimer from '../../domain/notification-timer'
 import presets from '../../domain/presets'
@@ -62,6 +64,10 @@ class App extends Component {
         actions.sync(this.timer)
     }
 
+    showCopyright() {
+        this.refs.copyright.open()
+    }
+
     get iconName () {
         return this.props.state.running ? 'play': 'pause'
     }
@@ -106,11 +112,13 @@ class App extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.topView}>
-                    <View style={styles.rec}>
-                        <Image
-                            source={require('../../resources/images/hex_logo.png')}
-                            style={styles.logo}
-                        />
+                    <View style={styles.preset}>
+                        <TouchableHighlight style={styles.copyrightButton} onPress={() => this.showCopyright()}>
+                            <Image
+                                source={require('../../resources/images/hex_logo.png')}
+                                style={styles.logo}
+                            />
+                        </TouchableHighlight>
                         <TouchableHighlight style={styles.presetButton} onPress={() => {state.running || this.togglePresets()}}>
                             <Text style={styles.presetText}>Preset</Text>
                         </TouchableHighlight>
@@ -148,6 +156,9 @@ class App extends Component {
                         </TouchableHighlight>
                     </View>
                 </View>
+                <Modal style={styles.modal} position="center" ref="copyright">
+                    <Copyright />
+                </Modal>
             </View>
         )
     }
@@ -224,9 +235,11 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
     },
-    rec: {
+    copyrightButton: {
+        right: 10,
+    },
+    preset: {
         left: 40,
-        top: 20,
         width: 250,
         height: 70,
         backgroundColor: '#444',
@@ -239,12 +252,17 @@ const styles = StyleSheet.create({
     presetText: {
         fontFamily: 'avenir',
         color: '#fff',
-        fontSize: 35,
+        fontSize: 36,
         paddingTop: 16,
         alignSelf: 'center',
         textAlign: 'center',
         textAlignVertical: 'center',
-    }
+    },
+    modal: {
+        height: 300,
+        width: 300,
+        borderRadius: 16,
+    },
 })
 
 

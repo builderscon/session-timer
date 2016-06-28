@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Q4W-S3-4V2">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Q4W-S3-4V2">
                     <rect key="frame" x="100" y="198" width="280" height="84"/>
                 </imageView>
             </subviews>
@@ -26,6 +26,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Image" width="280" height="84"/>
+        <image name="logo" width="280" height="84"/>
     </resources>
 </document>
