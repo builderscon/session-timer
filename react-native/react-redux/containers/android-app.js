@@ -4,14 +4,12 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
-    Animated,
     Image,
     StyleSheet,
     Text,
     TouchableHighlight,
     TouchableWithoutFeedback,
     View,
-    Easing,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Modal from 'react-native-modalbox'
@@ -22,6 +20,8 @@ import NotificatableTimer from '../../domain/notification-timer'
 import presets from '../../domain/presets'
 
 const FPS = 10
+const ANIMATION_DURATION = 30 * 1000
+const MAX_DEGREE = 360
 
 function zeroPadding (n) {
     return ('0' + n.toString()).slice(-2)
@@ -41,7 +41,6 @@ class App extends Component {
             return preset
         })
         this.timer = new NotificatableTimer(this.presets[this.index])
-        this.angle = new Animated.Value(0)
     }
 
     start () {
@@ -95,19 +94,6 @@ class App extends Component {
         return this.props.state.isRunning ? 'Stop': 'Start'
     }
 
-    componentDidMount() {
-        // this._animate()
-    }
-
-    _animate() {
-        this.angle.setValue(0)
-        this.animation = Animated.timing(this.angle, {
-            toValue: 360,
-            duration: 60000,
-            easing: Easing.linear,
-        }).start(() => this._animate())
-    }
-
     get remainingText () {
         const { state } = this.props
         const total = this.timer.total
@@ -116,6 +102,18 @@ class App extends Component {
         const remainingMinutes = Math.floor(remaining / 60)
         const remainingSeconds = Math.floor(remaining % 60)
         return zeroPadding(remainingMinutes) + ':' + zeroPadding(remainingSeconds)
+    }
+
+    get angleStyle() {
+        const offset = this.timer.elapsed % ANIMATION_DURATION
+        const angle = (offset / ANIMATION_DURATION) * MAX_DEGREE
+        return {
+            transform: [
+                {
+                    rotate: `${angle}deg`,
+                },
+            ]
+        }
     }
 
     render () {
@@ -145,14 +143,9 @@ class App extends Component {
                 </View>
                 <View style={styles.timer}>
                     <View style={{marginTop: 64}} />
-                    <Animated.Image
+                    <Image
                         source={{uri: 'hex_base'}}
-                        style={[styles.hex, {transform: [{
-                            rotate: this.angle.interpolate({
-                                inputRange: [0, 360],
-                                outputRange: ['0deg', '360deg'],
-                            })
-                        }]}]}
+                        style={[styles.hex, this.angleStyle]}
                     />
                     <Text style={styles.icon}>
                         <Icon
