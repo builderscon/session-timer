@@ -757,7 +757,9 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.builderscon.SessionTimer;
 				PRODUCT_NAME = SessionTimer;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -777,7 +779,9 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.builderscon.SessionTimer;
 				PRODUCT_NAME = SessionTimer;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
