@@ -13,7 +13,9 @@ import {
     Easing,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Modal from 'react-native-modalbox'
 import CircularTimer from '../components/circular-timer'
+import Copyright from '../components/copyright'
 import * as actions from '../actions/creators'
 import NotificatableTimer from '../../domain/notification-timer'
 import presets from '../../domain/presets'
@@ -62,6 +64,10 @@ class App extends Component {
         actions.sync(this.timer)
     }
 
+    showCopyright() {
+        this.refs.copyright.open()
+    }
+
     get iconName () {
         return this.props.state.running ? 'play': 'pause'
     }
@@ -105,13 +111,18 @@ class App extends Component {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
-                <View style={styles.topView}>
-                    <View style={styles.rec}>
-                        <Image
-                            source={require('../../resources/images/hex_logo.png')}
-                            style={styles.logo}
-                        />
-                        <TouchableHighlight style={styles.presetButton} onPress={() => {state.running || this.togglePresets()}}>
+                <View style={styles.header}>
+                    <View style={styles.copyright}>
+                        <TouchableHighlight onPress={() => this.showCopyright()}>
+                            <Image
+                                source={require('../../resources/images/hex_logo.png')}
+                                style={styles.logo}
+                            />
+                        </TouchableHighlight>
+                    </View>
+                    <View style={{flex: 3}} />
+                    <View style={styles.preset}>
+                        <TouchableHighlight onPress={() => {state.running || this.togglePresets()}}>
                             <Text style={styles.presetText}>Preset</Text>
                         </TouchableHighlight>
                     </View>
@@ -148,6 +159,9 @@ class App extends Component {
                         </TouchableHighlight>
                     </View>
                 </View>
+                <Modal style={styles.modal} position="center" ref="copyright">
+                    <Copyright />
+                </Modal>
             </View>
         )
     }
@@ -212,39 +226,42 @@ const styles = StyleSheet.create({
         fontFamily: 'avenir',
         fontWeight: 'bold',
     },
-    topView: {
-        flex: 1,
+    header: {
+        flex: 0.5,
         flexDirection: 'row',
         justifyContent: 'flex-end',
     },
+    copyright: {
+        flex: 2,
+        backgroundColor: '#444',
+        borderRadius: 36,
+        right: 20,
+    },
     logo: {
-        left: 20,
-        top: 10,
         alignSelf: 'flex-start',
         width: 50,
         height: 50,
+        left: 20,
     },
-    rec: {
-        left: 40,
-        top: 20,
-        width: 250,
-        height: 70,
+    preset: {
+        flex: 5,
         backgroundColor: '#444',
-        flexDirection: 'row',
-        borderRadius: 35
-    },
-    presetButton: {
-        left: 30,
+        borderRadius: 36,
+        left: 20,
     },
     presetText: {
         fontFamily: 'avenir',
         color: '#fff',
-        fontSize: 35,
-        paddingTop: 16,
+        fontSize: 36,
         alignSelf: 'center',
         textAlign: 'center',
         textAlignVertical: 'center',
-    }
+    },
+    modal: {
+        height: 300,
+        width: 300,
+        borderRadius: 16,
+    },
 })
 
 

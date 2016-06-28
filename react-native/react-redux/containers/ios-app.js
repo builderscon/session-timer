@@ -4,14 +4,16 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
+    Image,
     StyleSheet,
     Text,
     TouchableHighlight,
     View,
-    Image,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Modal from 'react-native-modalbox'
 import CircularTimer from '../components/circular-timer'
+import Copyright from '../components/copyright'
 import * as actions from '../actions/creators'
 import Device from '../lib/device'
 import NotificatableTimer from '../../domain/notification-timer'
@@ -88,14 +90,14 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
     },
-    rec: {
+    preset: {
         left: 40,
         top: 20,
         width: 250,
         height: 70,
         backgroundColor: '#444',
         flexDirection: 'row',
-        borderRadius: 35
+        borderRadius: 35,
     },
     presetButton: {
         left: 30,
@@ -106,6 +108,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 35,
         alignSelf: 'center'
+    },
+    modal: {
+        height: 300,
+        width: 300,
+        borderRadius: 16,
     },
 })
 
@@ -146,6 +153,10 @@ class App extends Component {
         actions.sync(this.timer)
     }
 
+    showCopyright() {
+        this.refs.copyright.open()
+    }
+
     get iconName () {
         return this.props.state.running ? 'play': 'pause'
     }
@@ -180,11 +191,13 @@ class App extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.topView}>
-                    <View style={styles.rec}>
-                        <Image
-                            source={require('../../resources/images/hex_logo.png')}
-                            style={styles.logo}
-                        />
+                    <View style={styles.preset}>
+                        <TouchableHighlight onPress={() => this.showCopyright()}>
+                            <Image
+                                source={require('../../resources/images/hex_logo.png')}
+                                style={styles.logo}
+                            />
+                        </TouchableHighlight>
                         <TouchableHighlight style={styles.presetButton} onPress={() => {state.running || this.togglePresets()}}>
                             <Text style={styles.presetText}>Preset</Text>
                         </TouchableHighlight>
@@ -217,6 +230,9 @@ class App extends Component {
                         </TouchableHighlight>
                     </View>
                 </View>
+                <Modal style={styles.modal} position="center" ref="copyright">
+                    <Copyright />
+                </Modal>
             </View>
         )
     }
