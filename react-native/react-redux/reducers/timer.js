@@ -1,11 +1,11 @@
 'use strict'
 
 import * as types from '../actions/types'
-import NotificatableTimer from '../domain/notification-timer'
+import NotificatableTimer from '../../domain/notification-timer'
 import {
     Alert,
 } from 'react-native'
-import presets from '../domain/presets'
+import presets from '../../domain/presets'
 
 const initialState = {
     progress: 0,

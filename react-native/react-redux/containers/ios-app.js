@@ -57,7 +57,7 @@ class App extends Component {
                 <View style={styles.topView}>
                     <View style={styles.rec}>
                         <Image
-                            source={require('../resources/images/hex_logo.png')}
+                            source={require('../../resources/images/hex_logo.png')}
                             style={styles.logo}
                         />
                         <Text style={styles.setting}>Setting</Text>
