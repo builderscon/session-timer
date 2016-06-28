@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
+    Animated,
+    Image,
     StyleSheet,
     Text,
     TouchableHighlight,
@@ -22,6 +24,8 @@ function zeroPadding (n) {
 class App extends Component {
     constructor (props) {
         super(props)
+
+        this.anim = new Animated.Value(0);
     }
 
     start () {
@@ -68,6 +72,10 @@ class App extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.timer}>
+                    <Image
+                        source={require('../../resources/images/hex_base.png')}
+                        style={styles.hex}
+                    />
                     <Text style={styles.icon}>
                         <Icon
                             name={this.iconName}
@@ -107,15 +115,22 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     icon: {
+        top: -240,
         alignSelf: 'center',
         textAlign: 'center',
     },
     text: {
+        top: -220,
         fontSize: 64,
         fontFamily: 'avenir',
         fontWeight: 'bold',
         alignSelf: 'center',
         textAlign: 'center',
+    },
+    hex: {
+        alignSelf: 'flex-start',
+        width: 300,
+        height: 300,
     },
     buttons: {
         flex: 1,
