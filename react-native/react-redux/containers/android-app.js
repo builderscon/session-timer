@@ -140,7 +140,7 @@ class App extends Component {
                 <View style={styles.timer}>
                     <View style={{marginTop: 64}} />
                     <Animated.Image
-                        source={require('../../resources/images/hex_base.png')}
+                        source={{uri: 'hex_base'}}
                         style={[styles.hex, {transform: [{
                             rotate: this.angle.interpolate({
                                 inputRange: [0, 360],
