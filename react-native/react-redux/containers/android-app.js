@@ -84,6 +84,15 @@ class App extends Component {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
+                <View style={styles.topView}>
+                    <View style={styles.rec}>
+                        <Image
+                            source={require('../../resources/images/hex_logo.png')}
+                            style={styles.logo}
+                        />
+                        <Text style={styles.setting}>Setting</Text>
+                    </View>
+                </View>
                 <View style={styles.timer}>
                     <Animated.Image
                         source={require('../../resources/images/hex_base.png')}
@@ -179,6 +188,34 @@ const styles = StyleSheet.create({
         fontFamily: 'avenir',
         fontWeight: 'bold',
     },
+    topView: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
+    logo: {
+        left: 20,
+        top: 10,
+        alignSelf: 'flex-start',
+        width: 50,
+        height: 50,
+    },
+    rec: {
+        left: 40,
+        top: 20,
+        width: 250,
+        height: 70,
+        backgroundColor: '#444',
+        flexDirection: 'row',
+        borderRadius: 35
+    },
+    setting: {
+        left: 30,
+        fontFamily: 'avenir',
+        color: '#fff',
+        fontSize: 35,
+        alignSelf: 'center'
+    }
 })
 
 
