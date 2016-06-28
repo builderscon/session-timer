@@ -1,16 +1,10 @@
 'use strict'
 
 import React, { Component } from 'react'
-import {
-    StyleSheet,
-} from 'react-native'
 import * as Progress from 'react-native-progress'
+import Device from '../lib/device';
 
 const { PropTypes } = React
-
-function zeroPadding (n) {
-    return ('0' + n.toString()).slice(-2)
-}
 
 export default class CircularTimer extends Component {
     static get propTypes () {
@@ -22,14 +16,8 @@ export default class CircularTimer extends Component {
 
     constructor(props) {
         super(props)
-    }
 
-    formatProgress () {
-        const { total, progress } = this.props
-        const remaining = (total * (1 - progress)) / 1000
-        const remainingMinutes = Math.floor(remaining / 60)
-        const remainingSeconds = Math.floor(remaining % 60)
-        return zeroPadding(remainingMinutes) + ':' + zeroPadding(remainingSeconds)
+        this.width = Device.shorter * 0.8
     }
 
     get circleColor () {
@@ -42,24 +30,12 @@ export default class CircularTimer extends Component {
     render () {
         return (
             <Progress.Circle
-                size={310}
+                size={this.width}
                 progress={this.props.progress}
                 unfilledColor={this.circleColor}
                 color={'#eeeeee'}
                 thickness={10}
-                showsText={true}
-                formatText={() => this.formatProgress()}
-                textStyle={[styles.timerText, {color: this.textColor}]}
             />
         )
     }
 }
-
-const styles = StyleSheet.create({
-    timerText: {
-        color: '#ddcecd',
-        top: 10,
-        fontFamily: 'avenir',
-        fontSize: 70,
-    },
-})
