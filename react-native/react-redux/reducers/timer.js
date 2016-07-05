@@ -1,7 +1,4 @@
 import * as types from '../actions/types'
-import {
-    Alert,
-} from 'react-native'
 
 const initialState = {
     progress: 0,
