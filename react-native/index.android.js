@@ -1,6 +1,6 @@
 'use strict'
 
 import { AppRegistry } from 'react-native'
-import Container from './react-redux/containers/android-container'
+import AppContainer from './react-redux/containers/app'
 
-AppRegistry.registerComponent('SessionTimer', () => Container)
+AppRegistry.registerComponent('SessionTimer', () => AppContainer)
