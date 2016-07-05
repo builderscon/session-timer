@@ -39,7 +39,7 @@ export default class NotificatableTimer {
 
     setupNotifications () {
         this.notificationTimeoutIds = Object.keys(this.notifications).map((at) => {
-            let remaining = this.total - parseInt(at, 10) - this.consumed
+            let remaining = parseInt(at, 10) - this.consumed
             if (remaining < 0) {
                 return null
             }
