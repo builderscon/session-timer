@@ -1,8 +1,6 @@
 'use strict'
 
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import {
     Image,
     StyleSheet,
@@ -15,19 +13,108 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Modal from 'react-native-modalbox'
 import CircularTimer from '../components/circular-timer'
 import Copyright from '../components/copyright'
-import * as actions from '../actions/creators'
+import Device from '../lib/device'
 import NotificatableTimer from '../../domain/notification-timer'
 import presets from '../../domain/presets'
 
-const FPS = 10
-const ANIMATION_DURATION = 30 * 1000
-const MAX_DEGREE = 360
+const FPS = 60
 
 function zeroPadding (n) {
     return ('0' + n.toString()).slice(-2)
 }
 
-class App extends Component {
+const base = Device.shorter
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'stretch',
+        backgroundColor: '#eeeeee',
+    },
+    timer: {
+        flex: 4,
+        justifyContent: 'center',
+        alignSelf: 'center',
+    },
+    icon: {
+        top: base / 4.0,
+        alignSelf: 'center',
+        textAlign: 'center',
+    },
+    text: {
+        top: -(base / 2),
+        fontFamily: 'avenir',
+        fontSize: base / 5,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        textAlign: 'center',
+    },
+    buttons: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    button: {
+        alignItems: 'stretch',
+        justifyContent: 'flex-end',
+        flex: 1,
+    },
+    resetButton: {
+        height: 100,
+        paddingTop: 20,
+        textAlign: 'center',
+        color: '#eeeeee',
+        fontSize: 40,
+        fontFamily: 'avenir',
+        fontWeight: 'bold',
+    },
+    toggleButton: {
+        height: 100,
+        paddingTop: 20,
+        textAlign: 'center',
+        color: '#eeeeee',
+        fontSize: 40,
+        fontFamily: 'avenir',
+        fontWeight: 'bold',
+    },
+    topView: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
+    logo: {
+        left: 20,
+        top: 10,
+        alignSelf: 'flex-start',
+        width: 50,
+        height: 50,
+    },
+    preset: {
+        left: 40,
+        top: 20,
+        width: 250,
+        height: 70,
+        backgroundColor: '#444',
+        flexDirection: 'row',
+        borderRadius: 35,
+    },
+    presetButton: {
+        left: 30,
+    },
+    presetText: {
+        paddingTop: 10,
+        fontFamily: 'avenir',
+        color: '#fff',
+        fontSize: 35,
+        alignSelf: 'center'
+    },
+    modal: {
+        height: 300,
+        width: 300,
+        borderRadius: 16,
+    },
+})
+
+export default class App extends Component {
     constructor (props) {
         super(props)
         this.index = 0
@@ -82,6 +169,9 @@ class App extends Component {
     get iconColor () {
         return this.props.state.isRunning ? '#222222' : '#777777'
     }
+    get textColor () {
+        return this.props.state.isRunning ? '#222222' : '#777777'
+    }
     get resetButtonColor () {
         return this.props.state.isRunning ? '#aaaaaa' : '#555555'
     }
@@ -104,36 +194,22 @@ class App extends Component {
         return zeroPadding(remainingMinutes) + ':' + zeroPadding(remainingSeconds)
     }
 
-    get angleStyle() {
-        const offset = this.timer.elapsed % ANIMATION_DURATION
-        const angle = (offset / ANIMATION_DURATION) * MAX_DEGREE
-        return {
-            transform: [
-                {
-                    rotate: `${angle}deg`,
-                },
-            ]
-        }
-    }
-
     render () {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.copyright}>
+                <View style={styles.topView}>
+                    <View style={styles.preset}>
                         <TouchableWithoutFeedback
-                            activeOpacity={0}
+                            activeOpacity={1}
                             onPress={() => this.showCopyright()}>
                             <View>
                                 <Image source={{uri: 'hex_logo'}} style={styles.logo} />
                             </View>
                         </TouchableWithoutFeedback>
-                    </View>
-                    <View style={{flex: 3}} />
-                    <View style={styles.preset}>
                         <TouchableWithoutFeedback
-                            activeOpacity={0}
+                            activeOpacity={1}
+                            style={styles.presetButton}
                             onPress={() => {state.isRunning || this.togglePresets()}}>
                             <View>
                                 <Text style={styles.presetText}>Preset</Text>
@@ -142,19 +218,19 @@ class App extends Component {
                     </View>
                 </View>
                 <View style={styles.timer}>
-                    <View style={{marginTop: 64}} />
-                    <Image
-                        source={{uri: 'hex_base'}}
-                        style={[styles.hex, this.angleStyle]}
-                    />
                     <Text style={styles.icon}>
                         <Icon
                             name={this.iconName}
-                            size={40}
+                            size={base / 6.5}
                             color={this.iconColor}
                         />
                     </Text>
-                    <Text style={styles.text}>{this.remainingText}</Text>
+                    <CircularTimer
+                        total={this.timer.total}
+                        progress={state.progress}
+                        isRunning={state.isRunning}
+                    />
+                    <Text style={[styles.text, {color: this.textColor}]}>{this.remainingText}</Text>
                 </View>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
@@ -175,107 +251,3 @@ class App extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'stretch',
-        backgroundColor: '#eeeeee',
-    },
-    timer: {
-        flex: 4,
-        justifyContent: 'center',
-        alignSelf: 'center',
-    },
-    icon: {
-        top: -240,
-        alignSelf: 'center',
-        textAlign: 'center',
-    },
-    text: {
-        top: -220,
-        fontSize: 64,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
-        alignSelf: 'center',
-        textAlign: 'center',
-    },
-    hex: {
-        alignSelf: 'flex-start',
-        width: 300,
-        height: 300,
-    },
-    buttons: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    button: {
-        alignItems: 'stretch',
-        justifyContent: 'flex-end',
-        flex: 1,
-    },
-    resetButton: {
-        height: 100,
-        paddingTop: 20,
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        color: '#eeeeee',
-        fontSize: 40,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
-    },
-    toggleButton: {
-        height: 100,
-        paddingTop: 20,
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        color: '#eeeeee',
-        fontSize: 40,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
-    },
-    header: {
-        flex: 0.5,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-    },
-    copyright: {
-        flex: 2,
-        backgroundColor: '#444',
-        borderRadius: 36,
-        right: 20,
-    },
-    logo: {
-        alignSelf: 'flex-start',
-        width: 50,
-        height: 50,
-        left: 20,
-    },
-    preset: {
-        flex: 5,
-        backgroundColor: '#444',
-        borderRadius: 36,
-        left: 20,
-    },
-    presetText: {
-        fontFamily: 'avenir',
-        color: '#fff',
-        fontSize: 36,
-        alignSelf: 'center',
-        textAlign: 'center',
-        textAlignVertical: 'center',
-    },
-    modal: {
-        height: 300,
-        width: 300,
-        borderRadius: 16,
-    },
-})
-
-
-export default connect(state => ({
-    state: state.timer
-}), dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
-}))(App)
