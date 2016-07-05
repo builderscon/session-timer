@@ -1,5 +1,3 @@
-'use strict';
-
 import Sound from 'react-native-sound'
 
 const SOUND_FILE_NAME = 'tin2.mp3'
