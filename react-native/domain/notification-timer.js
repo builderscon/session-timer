@@ -1,5 +1,3 @@
-'use strict'
-
 const DEFAULT_INTERVAL = 100
 
 // unit is milliseconds
