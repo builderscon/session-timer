@@ -20,77 +20,34 @@ function twiceTing () {
 const presets = [
     {
         total: 60 * 60 * 1000,
-        terminateCallback: () => {
-            twiceTing()
+        terminateCallback: () => twiceTing(),
+        notifications: {
+            [20 * 60 * 1000]: () => ting.play(),
+            [15 * 60 * 1000]: () => ting.play(),
+            [10 * 60 * 1000]: () => twiceTing(),
         },
-        notifications: [
-            {
-                at: 20 * 60 * 1000,
-                callback: () => {
-                    ting.play()
-                },
-            },
-            {
-                at: 15 * 60 * 1000,
-                callback: () => {
-                    ting.play()
-                },
-            },
-            {
-                at: 10 * 60 * 1000,
-                callback: () => {
-                    twiceTing()
-                },
-            },
-        ],
     },
     {
         total: 30 * 60 * 1000,
-        terminateCallback: () => {
-            twiceTing()
+        terminateCallback: () => twiceTing(),
+        notifications: {
+            [15 * 60 * 1000]: () => ting.play(),
+            [10 * 60 * 1000]: () => twiceTing(),
         },
-        notifications: [
-            {
-                at: 15 * 60 * 1000,
-                callback: () => {
-                    ting.play()
-                },
-            },
-            {
-                at: 10 * 60 * 1000,
-                callback: () => {
-                    twiceTing()
-                },
-            },
-        ],
     },
     {
         total: 5 * 60 * 1000,
-        terminateCallback: () => {
-            twiceTing()
+        terminateCallback: () => twiceTing(),
+        notifications: {
         },
-        notifications: [
-        ],
     },
     {
         total: 1 * 60 * 1000,
-        terminateCallback: () => {
-            twiceTing()
+        terminateCallback: () => twiceTing(),
+        notifications: {
+            [20 * 1000]: () => ting.play(),
+            [10 * 1000]: () => twiceTing(),
         },
-        notifications: [
-            {
-                at: 20 * 1000,
-                callback: () => {
-                    ting.play()
-                },
-            },
-            {
-                at: 10 * 1000,
-                callback: () => {
-                    twiceTing()
-                },
-            },
-        ],
     },
 ]
 

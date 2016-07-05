@@ -38,13 +38,13 @@ export default class NotificatableTimer {
     }
 
     setupNotifications () {
-        this.notifications.timeoutIds = this.notifications.map((settings) => {
-            let remaining = this.total - settings.at - this.consumed
+        this.notificationTimeoutIds = Object.keys(this.notifications).map((at) => {
+            let remaining = this.total - parseInt(at, 10) - this.consumed
             if (remaining < 0) {
                 return null
             }
             return setTimeout(() => {
-                settings.callback()
+                this.notifications[at]()
             }, remaining)
         })
     }
@@ -63,7 +63,7 @@ export default class NotificatableTimer {
         this.consumed += (new Date() - this.base)
         clearInterval(this.intervalId)
         clearInterval(this.terminater.timeoutId)
-        this.notifications.timeoutIds.forEach((timeoutId) => {
+        this.notificationTimeoutIds.forEach((timeoutId) => {
             if (timeoutId != null) {
                 clearTimeout(timeoutId)
             }
