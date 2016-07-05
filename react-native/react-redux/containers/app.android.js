@@ -2,15 +2,26 @@
 
 import React, { Component } from 'react'
 import {
-    createStore,
     applyMiddleware,
-    combineReducers
+    bindActionCreators,
+    combineReducers,
+    createStore,
 } from 'redux'
-import { Provider } from 'react-redux'
+import {
+    Provider,
+    connect,
+} from 'react-redux'
 import thunk from 'redux-thunk'
 
 import * as reducers from '../reducers'
-import App from './android-app'
+import * as actions from '../actions/creators'
+import App from '../components/app'
+
+const ConnectedApp = connect(state => ({
+    state: state.timer
+}), dispatch => ({
+    actions: bindActionCreators(actions, dispatch)
+}))(App)
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 const reducer = combineReducers(reducers)
@@ -24,7 +35,7 @@ export default class Container extends Component {
     render () {
         return (
             <Provider store={store}>
-                <App />
+                <ConnectedApp />
             </Provider>
         )
     }
