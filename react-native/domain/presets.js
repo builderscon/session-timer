@@ -22,7 +22,7 @@ const presets = [
         total: 60 * 60 * 1000,
         terminateCallback: () => twiceTing(),
         notifications: {
-            [40 * 60 * 1000]: () => ting.play(),
+            [30 * 60 * 1000]: () => ting.play(),
             [45 * 60 * 1000]: () => ting.play(),
             [50 * 60 * 1000]: () => twiceTing(),
         },
@@ -36,17 +36,24 @@ const presets = [
         },
     },
     {
+        total: 15 * 60 * 1000,
+        terminateCallback: () => twiceTing(),
+        notifications: {
+            [5 * 60 * 1000]: () => ting.play(),
+        },
+    },
+    {
         total: 5 * 60 * 1000,
         terminateCallback: () => twiceTing(),
         notifications: {
+            [4 * 60 * 1000]: () => ting.play(),
         },
     },
     {
         total: 1 * 60 * 1000,
         terminateCallback: () => twiceTing(),
         notifications: {
-            [40 * 1000]: () => ting.play(),
-            [50 * 1000]: () => twiceTing(),
+            [50 * 1000]: () => ting.play(),
         },
     },
 ]
