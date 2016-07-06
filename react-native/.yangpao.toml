@@ -1,0 +1,43 @@
+Current = "1.0.0"
+
+[[Files]]
+  Path = "package.json"
+  Prefix = "\"version\": \""
+  Postfix = "\""
+  IsNumber = false
+
+[[Files]]
+  Path = "android/app/build.gradle"
+  Prefix = "versionCode "
+  Postfix = ""
+  IsNumber = true
+
+[[Files]]
+  Path = "android/app/build.gradle"
+  Prefix = "versionName \""
+  Postfix = "\""
+  IsNumber = false
+
+[[Files]]
+  Path = "android/app/src/main/AndroidManifest.xml"
+  Prefix = "android:versionCode=\""
+  Postfix = "\""
+  IsNumber = true
+
+[[Files]]
+  Path = "android/app/src/main/AndroidManifest.xml"
+  Prefix = "android:versionName=\""
+  Postfix = "\""
+  IsNumber = false
+
+[[Files]]
+  Path = "ios/SessionTimer/Info.plist"
+  Prefix = "<string>"
+  Postfix = "</string>"
+  IsNumber = false
+
+[[Files]]
+  Path = "ios/SessionTimer/Info.plist"
+  Prefix = "<string>"
+  Postfix = "</string>"
+  IsNumber = true
