@@ -13,6 +13,6 @@ Then open `http://localhost:3000`
 
 ## Contribution
 ```
-npm run compile:js  # .jsx -> .js
-npm run compile:css # .scss -> .css
+npm run build  # .jsx -> .js, .scss -> .css
+npm run deploy # Deploy to Google Cloud Storage(web.timer.builderscon.io)
 ```
