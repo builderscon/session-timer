@@ -20602,7 +20602,7 @@
 	            _react2.default.createElement(
 	              'p',
 	              null,
-	              'Please read it using the following link: ',
+	              'The terms of use are available at: ',
 	              _react2.default.createElement(
 	                'a',
 	                { href: './tos.txt', target: '_blank' },
@@ -44013,7 +44013,7 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { style: { height: '100%' } },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'logo second-hand' },

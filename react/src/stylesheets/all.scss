@@ -16,6 +16,7 @@ body {
 }
 
 .logo {
+  position: absolute;
   width: 100%;
   text-align: center;
 }
@@ -81,8 +82,10 @@ nav a {
 }
 
 time {
-  display: block;
-  line-height: .6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
   font-size: 25rem;
   font-weight: bold;
   font-family: SinhalaMN-Bold;

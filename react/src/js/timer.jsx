@@ -35,7 +35,7 @@ export default class Timer extends Component {
     }
 
     return (
-      <div>
+      <div style={{ height: '100%' }}>
         <div className='logo second-hand'>
           <h1>Builderscon</h1>
           <img src='./logo-flat.png' style={style}/>
