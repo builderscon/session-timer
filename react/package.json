@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "npm run compile:js && npm run compile:css",
+    "deploy": "npm run build && gsutil rsync public/ gs://web.timer.builderscon.io/",
     "compile:js": "webpack",
     "compile:css": "node-sass --output-style compressed src/stylesheets/all.scss > public/all.css",
     "test": "mocha --compilers js:babel-core/register"
