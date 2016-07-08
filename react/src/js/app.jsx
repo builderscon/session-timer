@@ -19,7 +19,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className={'rest-time ' + this.state.restTimeClassName}>
+      <div className={'rest-time ' + this.state.restTimeClassName} onClick={this.handleClickScreen.bind(this)}>
         <Header />
         <SE ref="se" sound={this.props.sound} />
         <Timer ref="timer" limit={this.state.limit} onTick={this.handleTick.bind(this)} onLimit={this.handleLimit.bind(this)} />
@@ -30,6 +30,10 @@ export default class App extends Component {
         </Toolbar>
       </div>
     )
+  }
+
+  handleClickScreen() {
+    this.refs.se.load()
   }
 
   handleClickStart() {
