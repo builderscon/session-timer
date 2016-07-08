@@ -114,11 +114,12 @@ describe('Timer', () => {
     it('must call clearInterval() with state.timeoutID', () => {
       const spy = expect.spyOn(global, 'clearInterval')
       const timer = renderIntoDocument(<Timer limit={1} />)
-      timer.state.timeoutID = 9999
+      const expected = 9999
+      timer.state.timeoutID = expected
 
       timer.stop()
       expect(spy).toHaveBeenCalled()
-      expect(spy.calls[0].arguments[0]).toBe(timer.state.timeoutID)
+      expect(spy.calls[0].arguments[0]).toBe(expected)
     })
   })
 })
