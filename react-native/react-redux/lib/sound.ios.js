@@ -12,7 +12,7 @@ export default class {
         ting.play()
     }
 
-    static playTwice(delay = 200) {
+    static playTwice() {
         ting.play()
         const timeoutId = setTimeout(() => {
             ting.stop()
@@ -21,6 +21,6 @@ export default class {
                 clearTimeout(innerId)
             }, 0)
             clearTimeout(timeoutId)
-        }, delay)
+        }, 200)
     }
 }

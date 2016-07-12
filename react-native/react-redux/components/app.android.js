@@ -15,7 +15,7 @@ import {
     NotificatableTimer,
     PRESETS,
 } from 'builderscon-session-timer-domain'
-import sound from '../lib/sound.js'
+import sound from '../lib/sound'
 
 const FPS = 10
 const ANIMATION_DURATION = 30 * 1000

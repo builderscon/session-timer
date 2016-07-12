@@ -16,7 +16,7 @@ import {
     NotificatableTimer,
     PRESETS,
 } from 'builderscon-session-timer-domain'
-import sound from '../lib/sound.js'
+import sound from '../lib/sound'
 
 const FPS = 60
 
