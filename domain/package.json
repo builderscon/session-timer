@@ -8,7 +8,7 @@
     "build:watch": "babel src -d dist -w",
     "test": "mocha test/spec",
     "test:watch": "nodemon --watch ./src --watch ./test --exec npm test",
-    "release": "npm run build && npm publish"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
