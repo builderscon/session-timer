@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "builderscon-session-timer-domain": "^0.0.3",
     "react": "^15.1.0",
     "react-native": "^0.28.0",
     "react-native-modalbox": "^1.3.3",
