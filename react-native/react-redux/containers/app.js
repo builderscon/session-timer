@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
     applyMiddleware,
     bindActionCreators,
-    combineReducers,
     createStore,
 } from 'redux'
 import {
@@ -11,7 +10,7 @@ import {
 } from 'react-redux'
 import thunk from 'redux-thunk'
 
-import * as reducers from '../reducers'
+import reducers from '../reducers'
 import * as actions from '../actions/creators'
 import App from '../components/app'
 
@@ -22,8 +21,7 @@ const ConnectedApp = connect(state => ({
 }))(App)
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
-const reducer = combineReducers(reducers)
-const store = createStoreWithMiddleware(reducer)
+const store = createStoreWithMiddleware(reducers)
 
 export default class Container extends Component {
     constructor (props) {
