@@ -12,8 +12,11 @@ import Modal from 'react-native-modalbox'
 import CircularTimer from '../components/circular-timer'
 import Copyright from '../components/copyright'
 import Device from '../lib/device'
-import NotificatableTimer from '../../domain/notification-timer'
-import presets from '../../domain/presets'
+import {
+    NotificatableTimer,
+    PRESETS,
+} from 'builderscon-session-timer-domain'
+import sound from '../lib/sound.js'
 
 const FPS = 60
 
@@ -128,17 +131,13 @@ const styles = StyleSheet.create({
 export default class App extends Component {
     constructor (props) {
         super(props)
+
         this.index = 0
-        this.presets = presets.map((preset) => {
-            const original = preset.terminateCallback
-            preset.terminateCallback = () => {
-                original()
-                this.stop()
-                this.props.actions.terminate()
-            }
-            return preset
-        })
-        this.timer = new NotificatableTimer(this.presets[this.index])
+        this.presets = PRESETS
+        this.timer = new NotificatableTimer(
+            this.presets[this.index],
+            this.timerContext
+        )
     }
 
     start () {
@@ -164,7 +163,10 @@ export default class App extends Component {
         if (this.presets.length <= this.index) {
             this.index = 0
         }
-        this.timer = new NotificatableTimer(this.presets[this.index])
+        this.timer = new NotificatableTimer(
+            this.presets[this.index],
+            this.timerContext
+        )
         const { actions } = this.props
         actions.reset()
         actions.sync(this.timer)
@@ -172,6 +174,16 @@ export default class App extends Component {
 
     showCopyright() {
         this.refs.copyright.open()
+    }
+
+    get timerContext() {
+        return {
+            sound,
+            onTerminate: () => {
+                this.stop()
+                this.props.actions.terminate()
+            },
+        }
     }
 
     get iconName () {
