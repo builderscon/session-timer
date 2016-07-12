@@ -1,5 +1,17 @@
-export const SYNC = 'SYNC'
-export const START = 'START'
-export const STOP = 'STOP'
-export const RESET = 'RESET'
-export const TERMINATE = 'TERMINATE'
+const actionKinds = [
+    'SYNC',
+    'START',
+    'STOP',
+    'RESET',
+    'TERMINATE',
+]
+
+function buildActionTypes(kinds) {
+    const result = {}
+    kinds.forEach(type => {
+        result[type] = type
+    })
+    return result
+}
+
+export default buildActionTypes(actionKinds)
