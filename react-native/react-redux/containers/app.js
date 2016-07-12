@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
     applyMiddleware,
     bindActionCreators,
@@ -23,16 +23,10 @@ const ConnectedApp = connect(state => ({
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 const store = createStoreWithMiddleware(reducers)
 
-export default class Container extends Component {
-    constructor (props) {
-        super(props)
-    }
-
-    render () {
-        return (
-            <Provider store={store}>
-                <ConnectedApp />
-            </Provider>
-        )
-    }
+export default function Container() {
+    return (
+        <Provider store={store}>
+            <ConnectedApp />
+        </Provider>
+    )
 }
