@@ -1,4 +1,4 @@
-Current = "0.0.3"
+Current = "0.0.4"
 
 [[Files]]
   Path = "package.json"
