@@ -1,6 +1,6 @@
 {
   "name": "builderscon-session-timer-domain",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "domain logics for Builderscon session timer",
   "main": "index.js",
   "scripts": {
