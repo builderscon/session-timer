@@ -1,0 +1,30 @@
+{
+  "name": "builderscon-session-timer-domain",
+  "version": "0.0.1",
+  "description": "domain logics for Builderscon session timer",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d dist",
+    "build:watch": "babel src -d dist -w",
+    "test": "mocha test/spec",
+    "test:watch": "nodemon --watch ./src --watch ./test --exec npm test",
+    "release": "npm run build && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/builderscon/session-timer/domain"
+  },
+  "author": "januswel",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-unassert": "^2.1.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "mocha": "^2.5.3",
+    "nodemon": "^1.9.2",
+    "power-assert": "^1.4.1"
+  }
+}
