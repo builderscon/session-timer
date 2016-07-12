@@ -1,0 +1,7 @@
+Current = "0.0.3"
+
+[[Files]]
+  Path = "package.json"
+  Prefix = "\"version\": \""
+  Postfix = "\","
+  IsNumber = false
