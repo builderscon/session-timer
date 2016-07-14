@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/builderscon/session-timer#readme",
   "dependencies": {
+    "builderscon-session-timer-domain": "../domain",
     "express": "^4.13.4",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
