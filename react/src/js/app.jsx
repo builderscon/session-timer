@@ -52,9 +52,8 @@ export default class App extends Component {
   }
 
   handleChangeLimit(limit) {
-    this.setState({
-      limit
-    })
+    const restTimeClassName = this.getDefaultState().restTimeClassName
+    this.setState({ limit, restTimeClassName })
   }
 
   handleTick(past) {
@@ -68,12 +67,9 @@ export default class App extends Component {
     this.setState(_.pick(this.getDefaultState(), 'restTimeClassName', 'running'))
   }
 
-  // いい感じに閾値調整して下さい
-  // 0 <= rest <= 1
-  // rest = 残時間のパーセンテージ
-  getRestTimeClass(rest) {
-    const choice = this.getCurrentChoise()
-    const offset = this.getNotificationOffset(rest, choice)
+  getRestTimeClass(past) {
+    const choice = this.getCurrentChoice()
+    const offset = this.getNotificationOffset(past, choice)
     const classes = this.getRestTimeClasses(choice)
     const idx = Math.max(classes.length - offset, 0)
 
@@ -90,7 +86,7 @@ export default class App extends Component {
     return [''].concat(classes.slice(-choice.notifications.length))
   }
 
-  getChoise(total) {
+  getChoice(total) {
     for (let t of this.props.choices) {
       if (t.total === total) return t
     }
@@ -98,14 +94,14 @@ export default class App extends Component {
     throw new Error(`Unknown total: ${total}`)
   }
 
-  getCurrentChoise() {
-    return this.getChoise(this.state.limit)
+  getCurrentChoice() {
+    return this.getChoice(this.state.limit)
   }
 
   getNotificationOffset(past, choice) {
     past = parseInt(past)
     const timings = [0].concat(choice.notifications).concat([choice.total])
 
-    return _.findIndex(timings.reverse(), n => past > n)
+    return _.findIndex(timings.reverse(), n => past >= n)
   }
 }
