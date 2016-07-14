@@ -11,7 +11,7 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-      limit: +Object.keys(props.choices)[0],
+      limit: props.choices[0].total,
       restTimeClassName: '',
       running: false
     }

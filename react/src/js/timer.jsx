@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import { humanize } from './util'
 
 export default class Timer extends Component {
   static get propTypes() {
@@ -29,7 +30,6 @@ export default class Timer extends Component {
 
   render() {
     const rest = this.getRestTime()
-    const humanizeTime = this.humanizeTime(this.props.limit - this.state.past)
     const style = {
       'transform': `rotate(${360 * (rest)}deg)`
     }
@@ -40,17 +40,9 @@ export default class Timer extends Component {
           <h1>Builderscon</h1>
           <img src='./logo-flat.png' style={style}/>
         </div>
-        <time>{humanizeTime}</time>
+        <time>{humanize(this.props.limit - this.state.past)}</time>
       </div>
     )
-  }
-
-  humanizeTime(rest) {
-    const padd = (n, digit = 2) => ('0'.repeat(digit) + n).substr(-digit)
-    const minutes = Math.floor(rest / 60)
-    const seconds = Math.round(rest % 60)
-
-    return `${padd(minutes)}:${padd(seconds)}`
   }
 
   getRestTime() {
