@@ -34,4 +34,9 @@ export default class SE extends Component {
     this.refs.se.currentTime = 0
     this.refs.se.play()
   }
+
+  pause() {
+    this.refs.se.pause()
+    this.refs.se.currentTime = 0
+  }
 }
