@@ -6,26 +6,6 @@ import { useFakeTimers } from 'sinon'
 import Timer from '../src/js/timer'
 
 describe('Timer', () => {
-  describe('#humanizeTime()', () => {
-    it('must return 00:00 if 0', () => {
-      const timer = new Timer()
-      expect(timer.humanizeTime(0)).toBe('00:00')
-    })
-
-    it('must floor minutes', () => {
-      const timer = new Timer()
-      expect(timer.humanizeTime(119)).toInclude('01:')
-      expect(timer.humanizeTime(60)).toInclude('01:')
-      expect(timer.humanizeTime(59)).toInclude('00:')
-    })
-
-    it('must round seconds', () => {
-      const timer = new Timer()
-      expect(timer.humanizeTime(119)).toInclude(':59')
-      expect(timer.humanizeTime(60)).toInclude(':00')
-    })
-  })
-
   describe('#getRestTime()', () => {
     it('must return 0 if past = 0', () => {
       const timer = new Timer({ limit: 1 })
