@@ -1,3 +1,5 @@
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: `${__dirname}/src/js/index.jsx`,
@@ -16,6 +18,14 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin()
+  ],
   resolve: {
     extensions: ['', '.jsx', '.js']
   }
