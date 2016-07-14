@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import _ from 'lodash'
 import Header from './header'
 import Config from './config'
 import Timer from './timer'
@@ -10,8 +11,12 @@ export default class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      limit: props.choices[0].total,
+    this.state = this.getDefaultState()
+  }
+
+  getDefaultState() {
+    return {
+      limit: this.props.choices[0].total,
       restTimeClassName: '',
       running: false
     }
@@ -53,32 +58,54 @@ export default class App extends Component {
   }
 
   handleTick(past) {
-    const restTimeClassName = this.getRestTimeClass(past / this.state.limit)
-
     this.setState({
-      restTimeClassName
+      restTimeClassName: this.getRestTimeClass(past)
     })
   }
 
   handleLimit() {
     this.refs.se.play()
-    this.setState({
-      restTimeClassName: ''
-    })
+    this.setState(_.pick(this.getDefaultState(), 'restTimeClassName', 'running'))
   }
 
   // いい感じに閾値調整して下さい
   // 0 <= rest <= 1
   // rest = 残時間のパーセンテージ
   getRestTimeClass(rest) {
-    if (rest>= 0.92) { // ex. 残5分 / 60分セッション
-      return 'danger'
-    } else if (rest>= 0.83) { // ex. 残10分 / 60分セッション
-      return 'warning'
-    } else if (rest>= 0.75) { // ex. 残15分 / 60分セッション
-      return 'notice'
-    } else {
-      return ''
+    const choice = this.getCurrentChoise()
+    const offset = this.getNotificationOffset(rest, choice)
+    const classes = this.getRestTimeClasses(choice)
+    const idx = Math.max(classes.length - offset, 0)
+
+    return classes[idx]
+  }
+
+  getRestTimeClasses(choice) {
+    const classes = [
+      'notice',
+      'warning',
+      'danger'
+    ]
+
+    return [''].concat(classes.slice(-choice.notifications.length))
+  }
+
+  getChoise(total) {
+    for (let t of this.props.choices) {
+      if (t.total === total) return t
     }
+
+    throw new Error(`Unknown total: ${total}`)
+  }
+
+  getCurrentChoise() {
+    return this.getChoise(this.state.limit)
+  }
+
+  getNotificationOffset(past, choice) {
+    past = parseInt(past)
+    const timings = [0].concat(choice.notifications).concat([choice.total])
+
+    return _.findIndex(timings.reverse(), n => past > n)
   }
 }
