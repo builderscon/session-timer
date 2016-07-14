@@ -48,6 +48,7 @@ export default class App extends Component {
 
   handleClickStop() {
     this.refs.timer.stop()
+    this.refs.se.pause()
     this.setState({ running: false })
   }
 
