@@ -28,27 +28,45 @@ const base = Device.shorter
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         alignItems: 'stretch',
         backgroundColor: '#eeeeee',
     },
     timer: {
-        flex: 4,
-        justifyContent: 'center',
+        flex: 2,
         alignSelf: 'center',
     },
     icon: {
-        top: base / 4.0,
+        top: base / 4.5,
         alignSelf: 'center',
         textAlign: 'center',
     },
     text: {
-        top: -(base / 2),
+        top: -(base / 2.3),
         fontFamily: 'avenir',
-        fontSize: base / 5,
+        fontSize: base / 6,
         fontWeight: 'bold',
         alignSelf: 'center',
         textAlign: 'center',
+    },
+    alertTimes: {
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        height: 44,
+        width: 120,
+        right: -80,
+        borderRadius: 22,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ddd'
+    },
+    bellIcon: {
+        right: 5
+    },
+    alertTime: {
+        fontSize: 23,
+        fontFamily: 'avenir',
+        color: '#777'
     },
     buttons: {
         flex: 1,
@@ -64,7 +82,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         textAlign: 'center',
         color: '#eeeeee',
-        fontSize: 40,
+        fontSize: 45,
         fontFamily: 'avenir',
         fontWeight: 'bold',
     },
@@ -73,53 +91,46 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         textAlign: 'center',
         color: '#eeeeee',
-        fontSize: 40,
+        fontSize: 45,
         fontFamily: 'avenir',
         fontWeight: 'bold',
     },
     header: {
-        top: 20,
-        flex: 0.56,
+        flex: 0.7,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    copyright: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-    },
     copyrightButton: {
-        width: 90,
+        width: 100,
         backgroundColor: '#444',
+        height: 55,
         borderRadius: 36,
         right: 36,
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 10
     },
     logo: {
-        alignSelf: 'center',
         width: 50,
         height: 50,
         left: 18,
     },
-    preset: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-    },
     presetButton: {
-        width: 180,
-        height: 50,
+        width: 200,
+        height: 55,
         backgroundColor: '#444',
         borderRadius: 36,
         left: 36,
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: 10
     },
     presetText: {
-        alignSelf: 'center',
         fontFamily: 'avenir',
         color: '#fff',
-        fontSize: 32,
-        right: 18,
-        height: 50,
+        fontSize: 30,
+        right: 10,
     },
     modal: {
         height: 300,
@@ -222,31 +233,37 @@ export default class App extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <View style={styles.copyright}>
-                        <TouchableWithoutFeedback
-                            activeOpacity={1}
-                            onPress={() => this.showCopyright()}
-                        >
-                            <View style={styles.copyrightButton}>
-                                <Image source={{uri: 'hex_logo'}} style={styles.logo} />
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </View>
-                    <View style={styles.preset}>
-                        <TouchableWithoutFeedback
-                            activeOpacity={1}
-                            onPress={() => {state.isRunning || this.togglePresets()}}>
-                            <View style={styles.presetButton}>
-                                <Text style={styles.presetText}>Preset</Text>
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </View>
+                    <TouchableWithoutFeedback
+                        activeOpacity={1}
+                        onPress={() => this.showCopyright()}
+                    >
+                        <View style={styles.copyrightButton}>
+                            <Image source={{uri: 'hex_logo'}} style={styles.logo} />
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
+                        activeOpacity={1}
+                        onPress={() => {state.isRunning || this.togglePresets()}}>
+                        <View style={styles.presetButton}>
+                            <Text style={styles.presetText}>Preset</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
                 </View>
                 <View style={styles.timer}>
+                    <View style={styles.alertTimes}>
+                        <Text style={styles.bellIcon}>
+                            <Icon
+                                name={'bell'}
+                                size={base / 20}
+                                color={'#777'}
+                            />
+                        </Text>
+                        <Text style={styles.alertTime}>{'50'}</Text>
+                    </View>
                     <Text style={styles.icon}>
                         <Icon
                             name={this.iconName}
-                            size={base / 6.5}
+                            size={base / 10}
                             color={this.iconColor}
                         />
                     </Text>

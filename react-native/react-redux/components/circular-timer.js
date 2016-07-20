@@ -15,7 +15,7 @@ export default class CircularTimer extends Component {
     constructor(props) {
         super(props)
 
-        this.width = Device.shorter * 0.8
+        this.width = Device.shorter * 0.7
     }
 
     get circleColor () {
