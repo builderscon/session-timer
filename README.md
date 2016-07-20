@@ -14,5 +14,5 @@ future works
 ------------
 
 - sync web and smartphone app with FireBase ?
-    - #2
+    - [#2](https://github.com/builderscon/session-timer/issues/2)
 - and more... ?
