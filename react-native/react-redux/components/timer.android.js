@@ -18,25 +18,20 @@ const { PropTypes } = React
 const base = Device.shorter
 const styles = StyleSheet.create({
     timer: {
-        flex: 4,
+        flex: 1,
         justifyContent: 'center',
-        alignSelf: 'center',
+        alignItems: 'center',
     },
     icon: {
         top: -240,
-        alignSelf: 'center',
-        textAlign: 'center',
     },
     text: {
         top: -220,
         fontSize: 64,
         fontFamily: 'avenir',
         fontWeight: 'bold',
-        alignSelf: 'center',
-        textAlign: 'center',
     },
     hex: {
-        alignSelf: 'flex-start',
         width: 300,
         height: 300,
     },
