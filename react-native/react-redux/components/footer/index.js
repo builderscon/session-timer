@@ -2,33 +2,19 @@ import React from 'react'
 import {
     StyleSheet,
     Text,
-    TouchableHighlight,
+    TouchableOpacity,
     View,
 } from 'react-native'
 
 const styles = StyleSheet.create({
-    buttons: {
-        flex: 1,
+    container: {
         flexDirection: 'row',
     },
     button: {
-        alignItems: 'stretch',
-        justifyContent: 'flex-end',
         flex: 1,
     },
-    resetButton: {
-        height: 100,
-        paddingTop: 20,
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        color: '#eeeeee',
-        fontSize: 40,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
-    },
-    toggleButton: {
-        height: 100,
-        paddingTop: 20,
+    text: {
+        padding: 20,
         textAlign: 'center',
         textAlignVertical: 'center',
         color: '#eeeeee',
@@ -53,17 +39,23 @@ export default class Footer extends React.Component {
 
     render() {
         return (
-            <View style={styles.buttons}>
-                <View style={styles.button}>
-                    <TouchableHighlight onPress={this.props.onPressReset}>
-                        <Text style={[styles.resetButton, {backgroundColor: this.resetButtonColor}]}>Reset</Text>
-                    </TouchableHighlight>
-                </View>
-                <View style={styles.button}>
-                    <TouchableHighlight onPress={this.props.onPressToggle}>
-                        <Text style={[styles.toggleButton, {backgroundColor: this.toggleButtonColor}]}>{this.toggleButtonText}</Text>
-                    </TouchableHighlight>
-                </View>
+            <View style={styles.container}>
+                <TouchableOpacity
+                    onPress={this.props.onPressReset}
+                    style={styles.button}
+                >
+                    <Text style={[styles.text, {backgroundColor: this.resetButtonColor}]}>
+                        Reset
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={this.props.onPressToggle}
+                    style={styles.button}
+                >
+                    <Text style={[styles.text, {backgroundColor: this.toggleButtonColor}]}>
+                        {this.toggleButtonText}
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
