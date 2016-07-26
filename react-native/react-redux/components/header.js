@@ -1,9 +1,6 @@
 import React from 'react'
 import {
-    Image,
     StyleSheet,
-    Text,
-    TouchableWithoutFeedback,
     View,
 } from 'react-native'
 import Logo from './logo'
@@ -13,7 +10,6 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
     },
 })
 
