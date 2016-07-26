@@ -55,25 +55,33 @@ const styles = StyleSheet.create({
 })
 
 export default class App extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
 
         this.index = 0
-        this.presets = PRESETS
+
+        this.timerContext = {
+            sound,
+            onTerminate: () => {
+                this.stop()
+                this.props.actions.terminate()
+            },
+        }
+
         this.timer = new NotificatableTimer(
-            this.presets[this.index],
+            PRESETS[this.index],
             this.timerContext
         )
     }
 
-    start () {
+    start() {
         this.timer.start()
         const { actions } = this.props
         actions.start()
         this.intervalId = setInterval(() => actions.sync(this.timer), 1000 / FPS)
     }
 
-    stop () {
+    stop() {
         this.timer.stop()
         this.props.actions.stop()
         clearInterval(this.intervalId)
@@ -86,11 +94,11 @@ export default class App extends React.Component {
 
     togglePresets() {
         ++this.index
-        if (this.presets.length <= this.index) {
+        if (PRESETS.length <= this.index) {
             this.index = 0
         }
         this.timer = new NotificatableTimer(
-            this.presets[this.index],
+            PRESETS[this.index],
             this.timerContext
         )
         const { actions } = this.props
@@ -102,27 +110,17 @@ export default class App extends React.Component {
         this.refs.copyright.open()
     }
 
-    get timerContext() {
-        return {
-            sound,
-            onTerminate: () => {
-                this.stop()
-                this.props.actions.terminate()
-            },
-        }
-    }
-
-    get iconName () {
+    get iconName() {
         return this.props.state.isRunning ? 'play': 'pause'
     }
-    get iconColor () {
+    get iconColor() {
         return this.props.state.isRunning ? '#222222' : '#777777'
     }
-    get textColor () {
+    get textColor() {
         return this.props.state.isRunning ? '#222222' : '#777777'
     }
 
-    get remainingText () {
+    get remainingText() {
         const { state } = this.props
         const total = this.timer.total
         const progress = state.progress
@@ -132,7 +130,7 @@ export default class App extends React.Component {
         return zeroPadding(remainingMinutes) + ':' + zeroPadding(remainingSeconds)
     }
 
-    render () {
+    render() {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
@@ -140,6 +138,7 @@ export default class App extends React.Component {
                     onPressLogo={() => this.showCopyright()}
                     onPressPresets={() => {state.isRunning || this.togglePresets()}}
                 />
+
                 <View style={styles.timer}>
                     <Text style={styles.icon}>
                         <Icon
@@ -153,14 +152,22 @@ export default class App extends React.Component {
                         progress={state.progress}
                         isRunning={state.isRunning}
                     />
-                    <Text style={[styles.text, {color: this.textColor}]}>{this.remainingText}</Text>
+                    <Text style={[styles.text, {color: this.textColor}]}>
+                        {this.remainingText}
+                    </Text>
                 </View>
+
                 <Footer
                     state={state}
                     onPressToggle={() => state.isReady && (state.isRunning ? this.stop(): this.start())}
                     onPressReset={() => {state.isRunning || this.reset()}}
                 />
-                <Modal style={styles.modal} position="center" ref="copyright">
+
+                <Modal
+                    ref="copyright"
+                    position="center"
+                    style={styles.modal}
+                >
                     <Copyright />
                 </Modal>
             </View>
