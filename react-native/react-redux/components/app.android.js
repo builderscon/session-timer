@@ -128,18 +128,6 @@ export default class App extends React.Component {
     get iconColor () {
         return this.props.state.isRunning ? '#222222' : '#777777'
     }
-    get resetButtonColor () {
-        return this.props.state.isRunning ? '#aaaaaa' : '#555555'
-    }
-    get toggleButtonColor () {
-        return this.props.state.isReady
-            ? this.props.state.isRunning ? '#ea5432' : '#5db7e8'
-            : '#aaaaaa'
-    }
-    get toggleButtonText () {
-        return this.props.state.isRunning ? 'Stop': 'Start'
-    }
-
     get remainingText () {
         const { state } = this.props
         const total = this.timer.total
