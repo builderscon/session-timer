@@ -5,6 +5,7 @@ import {
     Text,
     View,
 } from 'react-native'
+import Spacer from './spacer'
 import Header from './header'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import CircularTimer from './circular-timer'
@@ -149,6 +150,8 @@ export default class App extends React.Component {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
+                <Spacer />
+
                 <Header
                     onPressLogo={() => this.showCopyright()}
                     onPressPresets={() => {state.isRunning || this.togglePresets()}}
