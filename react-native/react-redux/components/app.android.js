@@ -16,7 +16,7 @@ import {
     PRESETS,
 } from 'builderscon-session-timer-domain'
 import sound from '../lib/sound'
-import { zeroPadding } from '../lib/util'
+import { progressToHoursMinutes } from '../lib/util'
 
 const FPS = 10
 const ANIMATION_DURATION = 30 * 1000
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 })
 
 export default class App extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
 
         this.index = 0
@@ -124,13 +124,9 @@ export default class App extends React.Component {
         return this.props.state.isRunning ? '#222222' : '#777777'
     }
     get remainingText() {
-        const { state } = this.props
         const total = this.timer.total
-        const progress = state.progress
-        const remaining = (total * (1 - progress)) / 1000
-        const remainingMinutes = Math.floor(remaining / 60)
-        const remainingSeconds = Math.floor(remaining % 60)
-        return zeroPadding(remainingMinutes) + ':' + zeroPadding(remainingSeconds)
+        const progress = this.props.state.progress
+        return progressToHoursMinutes(progress, total)
     }
 
     get angleStyle() {
