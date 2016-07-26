@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
     Image,
     StyleSheet,
     Text,
     TouchableHighlight,
-    TouchableWithoutFeedback,
     View,
 } from 'react-native'
+import Header from './header'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import Modal from 'react-native-modalbox'
 import CircularTimer from '../components/circular-timer'
+import Modal from 'react-native-modalbox'
 import Copyright from '../components/copyright'
 import {
     NotificatableTimer,
@@ -25,7 +25,7 @@ function zeroPadding (n) {
     return ('0' + n.toString()).slice(-2)
 }
 
-export default class App extends Component {
+export default class App extends React.Component {
     constructor (props) {
         super(props)
 
@@ -129,28 +129,10 @@ export default class App extends Component {
         const { state, actions } = this.props
         return (
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.copyright}>
-                        <TouchableWithoutFeedback
-                            activeOpacity={0}
-                            onPress={() => this.showCopyright()}
-                        >
-                            <View style={styles.copyrightButton}>
-                                <Image source={{uri: 'hex_logo'}} style={styles.logo} />
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </View>
-                    <View style={styles.preset}>
-                        <TouchableWithoutFeedback
-                            activeOpacity={0}
-                            onPress={() => {state.isRunning || this.togglePresets()}}
-                        >
-                            <View style={styles.presetButton}>
-                                <Text style={styles.presetText}>Preset</Text>
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </View>
-                </View>
+                <Header
+                    onPressLogo={() => this.showCopyright()}
+                    onPressPresets={() => {state.isRunning || this.togglePresets()}}
+                />
                 <View style={styles.timer}>
                     <View style={{marginTop: 64}} />
                     <Image
@@ -244,49 +226,6 @@ const styles = StyleSheet.create({
         fontSize: 40,
         fontFamily: 'avenir',
         fontWeight: 'bold',
-    },
-    header: {
-        flex: 0.56,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    copyright: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-    },
-    copyrightButton: {
-        width: 90,
-        backgroundColor: '#444',
-        borderRadius: 36,
-        right: 36,
-    },
-    logo: {
-        alignSelf: 'center',
-        width: 50,
-        height: 50,
-        left: 18,
-    },
-    preset: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-    },
-    presetButton: {
-        width: 180,
-        height: 50,
-        backgroundColor: '#444',
-        borderRadius: 36,
-        left: 36,
-    },
-    presetText: {
-        alignSelf: 'center',
-        fontFamily: 'avenir',
-        color: '#fff',
-        fontSize: 32,
-        right: 18,
-        height: 50,
     },
     modal: {
         height: 300,
