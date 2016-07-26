@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
     Image,
     Linking,
@@ -9,30 +9,37 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const styles = StyleSheet.create({
-    copyright: {
+    container: {
         height: 300,
         width: 300,
+        padding: 32,
         backgroundColor: '#eeeeee',
         borderRadius: 16,
+        alignItems: 'center',
     },
-    copyrightText: {
-        flex: 0.5,
+    copyright: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    },
+    text: {
+        height: 28,
         fontSize: 24,
-        alignSelf: 'center',
     },
-    copyrightLogo: {
-        flex: 0.5,
-        alignSelf: 'center',
+    logo: {
         width: 200,
+        height: 64,
     },
-    copyrightButtons: {
+    buttons: {
         flex: 1,
         flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
     },
-    copyrightButton: {
-        flex: 1,
-        alignSelf: 'center',
-        textAlign: 'center',
+    button: {
+        width: 48,
+        height: 48,
+        margin: 16,
     },
 })
 
@@ -50,36 +57,47 @@ function openUrl(url) {
 
 export default function Copyright() {
     return (
-        <View style={styles.copyright}>
-            <View style={{flex: 0.3}} />
-            <Text style={styles.copyrightText}>powerd by</Text>
-            <Image style={styles.copyrightLogo} source={{uri: 'logo'}} resizeMode="contain" />
-            <View style={styles.copyrightButtons}>
-                <View style={{flex: 0.5}} />
-                <Text style={styles.copyrightButton} onPress={() => {openUrl(URL.HOME)}}>
+        <View style={styles.container}>
+            <View style={styles.copyright}>
+                <Text style={styles.text}>powerd by</Text>
+                <Image
+                    source={{uri: 'logo'}}
+                    resizeMode="contain"
+                    style={styles.logo}
+                />
+            </View>
+            <View style={styles.buttons}>
+                <Text
+                    onPress={() => {openUrl(URL.HOME)}}
+                    style={styles.button}
+                >
                     <Icon
                         name="home"
                         size={48}
                         color="black"
                     />
                 </Text>
-                <Text style={styles.copyrightButton} onPress={() => {openUrl(URL.TWITTER)}}>
+                <Text
+                    onPress={() => {openUrl(URL.TWITTER)}}
+                    style={styles.button}
+                >
                     <Icon
                         name="twitter"
                         size={48}
                         color="black"
                     />
                 </Text>
-                <Text style={styles.copyrightButton} onPress={() => {openUrl(URL.GITHUB)}}>
+                <Text
+                    onPress={() => {openUrl(URL.GITHUB)}}
+                    style={styles.button}
+                >
                     <Icon
                         name="github"
                         size={48}
                         color="black"
                     />
                 </Text>
-                <View style={{flex: 0.5}} />
             </View>
-            <View style={{flex: 0.3}} />
         </View>
     )
 }
