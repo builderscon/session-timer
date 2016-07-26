@@ -27,6 +27,7 @@ const base = Device.shorter
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 20,
         justifyContent: 'flex-end',
         alignItems: 'stretch',
         backgroundColor: '#eeeeee',

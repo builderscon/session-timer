@@ -10,9 +10,7 @@ import Logo from './logo'
 import Presets from './presets'
 
 const styles = StyleSheet.create({
-    header: {
-        top: 20,
-        flex: 0.56,
+    container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -21,7 +19,7 @@ const styles = StyleSheet.create({
 
 export default function Header(props) {
     return (
-        <View style={styles.header}>
+        <View style={styles.container}>
             <Logo onPress={props.onPressLogo} />
             <Presets onPress={props.onPressPresets} />
         </View>
