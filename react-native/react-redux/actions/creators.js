@@ -1,5 +1,12 @@
 import types from './types'
 
+export function rotate(window) {
+    return {
+        type: types.ROTATE,
+        window,
+    }
+}
+
 export function sync (timer) {
     return {
         type: types.SYNC,

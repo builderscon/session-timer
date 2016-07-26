@@ -1,13 +1,25 @@
 import ACTION_TYPES from '../actions/types'
+import Device from '../lib/device.js'
 
 const initialState = {
     progress: 0,
     isRunning: false,
     isReady: true,
+    window: {
+        x: 0,
+        y: 0,
+        width: Device.width,
+        height: Device.height,
+    },
 }
 
 export default function timer(state = initialState, action = {}) {
     switch (action.type) {
+        case ACTION_TYPES.ROTATE:
+            return {
+                ...state,
+                window: action.window
+            }
         case ACTION_TYPES.SYNC:
             return {
                 ...state,
