@@ -6,6 +6,7 @@ import {
     TouchableWithoutFeedback,
     View,
 } from 'react-native'
+import Logo from './logo'
 
 const styles = StyleSheet.create({
     header: {
@@ -14,23 +15,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-    },
-    copyright: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-    },
-    copyrightButton: {
-        width: 90,
-        backgroundColor: '#444',
-        borderRadius: 36,
-        right: 36,
-    },
-    logo: {
-        alignSelf: 'center',
-        width: 50,
-        height: 50,
-        left: 18,
     },
     preset: {
         flex: 1,
@@ -57,16 +41,7 @@ const styles = StyleSheet.create({
 export default function Header(props) {
     return (
         <View style={styles.header}>
-            <View style={styles.copyright}>
-                <TouchableWithoutFeedback
-                    activeOpacity={1}
-                    onPress={props.onPressLogo}
-                >
-                    <View style={styles.copyrightButton}>
-                        <Image source={{uri: 'hex_logo'}} style={styles.logo} />
-                    </View>
-                </TouchableWithoutFeedback>
-            </View>
+            <Logo onPress={props.onPressLogo} />
             <View style={styles.preset}>
                 <TouchableWithoutFeedback
                     activeOpacity={1}
