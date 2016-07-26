@@ -2,14 +2,14 @@ import React from 'react'
 import {
     StyleSheet,
     Text,
-    TouchableHighlight,
     View,
 } from 'react-native'
 import Header from './header'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import CircularTimer from '../components/circular-timer'
+import CircularTimer from './circular-timer'
+import Footer from './footer'
 import Modal from 'react-native-modalbox'
-import Copyright from '../components/copyright'
+import Copyright from './copyright'
 import Device from '../lib/device'
 import {
     NotificatableTimer,
@@ -49,33 +49,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         alignSelf: 'center',
         textAlign: 'center',
-    },
-    buttons: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    button: {
-        alignItems: 'stretch',
-        justifyContent: 'flex-end',
-        flex: 1,
-    },
-    resetButton: {
-        height: 100,
-        paddingTop: 20,
-        textAlign: 'center',
-        color: '#eeeeee',
-        fontSize: 40,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
-    },
-    toggleButton: {
-        height: 100,
-        paddingTop: 20,
-        textAlign: 'center',
-        color: '#eeeeee',
-        fontSize: 40,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
     },
     modal: {
         height: 300,
@@ -151,17 +124,6 @@ export default class App extends React.Component {
     get textColor () {
         return this.props.state.isRunning ? '#222222' : '#777777'
     }
-    get resetButtonColor () {
-        return this.props.state.isRunning ? '#aaaaaa' : '#555555'
-    }
-    get toggleButtonColor () {
-        return this.props.state.isReady
-            ? this.props.state.isRunning ? '#ea5432' : '#5db7e8'
-            : '#aaaaaa'
-    }
-    get toggleButtonText () {
-        return this.props.state.isRunning ? 'Stop': 'Start'
-    }
 
     get remainingText () {
         const { state } = this.props
@@ -196,18 +158,11 @@ export default class App extends React.Component {
                     />
                     <Text style={[styles.text, {color: this.textColor}]}>{this.remainingText}</Text>
                 </View>
-                <View style={styles.buttons}>
-                    <View style={styles.button}>
-                        <TouchableHighlight onPress={() => {state.isRunning || this.reset()}}>
-                            <Text style={[styles.resetButton, {backgroundColor: this.resetButtonColor}]}>Reset</Text>
-                        </TouchableHighlight>
-                    </View>
-                    <View style={styles.button}>
-                        <TouchableHighlight onPress={() => state.isReady && (state.isRunning ? this.stop(): this.start())}>
-                            <Text style={[styles.toggleButton, {backgroundColor: this.toggleButtonColor}]}>{this.toggleButtonText}</Text>
-                        </TouchableHighlight>
-                    </View>
-                </View>
+                <Footer
+                    state={state}
+                    onPressToggle={() => state.isReady && (state.isRunning ? this.stop(): this.start())}
+                    onPressReset={() => {state.isRunning || this.reset()}}
+                />
                 <Modal style={styles.modal} position="center" ref="copyright">
                     <Copyright />
                 </Modal>
