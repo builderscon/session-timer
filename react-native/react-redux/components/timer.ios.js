@@ -9,32 +9,27 @@ import * as Progress from 'react-native-progress'
 import Device from '../lib/device'
 import { progressToHoursMinutes } from '../lib/util'
 
-const { PropTypes } = React
-
 const base = Device.shorter
 const styles = StyleSheet.create({
-    timer: {
-        flex: 4,
+    container: {
+        flex: 1,
         justifyContent: 'center',
-        alignSelf: 'center',
+        alignItems: 'center',
     },
     icon: {
         top: base / 4.0,
-        alignSelf: 'center',
-        textAlign: 'center',
     },
     text: {
         top: -(base / 2),
         fontFamily: 'avenir',
         fontSize: base / 5,
         fontWeight: 'bold',
-        alignSelf: 'center',
-        textAlign: 'center',
     },
 })
 
+const { PropTypes } = React
 export default class Timer extends React.Component {
-    static get propTypes () {
+    static get propTypes() {
         return {
             state: PropTypes.object.isRequired,
             timer: PropTypes.object.isRequired,
@@ -70,7 +65,7 @@ export default class Timer extends React.Component {
 
     render () {
         return (
-            <View style={styles.timer}>
+            <View style={styles.container}>
                 <Text style={styles.icon}>
                     <Icon
                         name={this.iconName}

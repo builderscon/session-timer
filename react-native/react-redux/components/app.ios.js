@@ -20,9 +20,11 @@ const FPS = 60
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'stretch',
         backgroundColor: '#eeeeee',
+    },
+    app: {
+        flex: 1,
+        justifyContent: 'space-between',
     },
     modal: {
         height: 300,
@@ -95,21 +97,23 @@ export default class App extends React.Component {
             <View style={styles.container}>
                 <Spacer />
 
-                <Header
-                    onPressLogo={() => this.showCopyright()}
-                    onPressPresets={() => {state.isRunning || this.togglePresets()}}
-                />
+                <View style={styles.app}>
+                    <Header
+                        onPressLogo={() => this.showCopyright()}
+                        onPressPresets={() => {state.isRunning || this.togglePresets()}}
+                    />
 
-                <Timer
-                    state={state}
-                    timer={this.timer}
-                />
+                    <Timer
+                        state={state}
+                        timer={this.timer}
+                    />
 
-                <Footer
-                    state={state}
-                    onPressToggle={() => state.isReady && (state.isRunning ? this.stop(): this.start())}
-                    onPressReset={() => {state.isRunning || this.reset()}}
-                />
+                    <Footer
+                        state={state}
+                        onPressToggle={() => state.isReady && (state.isRunning ? this.stop(): this.start())}
+                        onPressReset={() => {state.isRunning || this.reset()}}
+                    />
+                </View>
 
                 <Modal
                     ref="copyright"
