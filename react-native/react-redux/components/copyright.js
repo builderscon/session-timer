@@ -4,6 +4,7 @@ import {
     Linking,
     StyleSheet,
     Text,
+    TouchableOpacity,
     View,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -67,36 +68,33 @@ export default function Copyright() {
                 />
             </View>
             <View style={styles.buttons}>
-                <Text
-                    onPress={() => {openUrl(URL.HOME)}}
-                    style={styles.button}
-                >
-                    <Icon
-                        name="home"
-                        size={48}
-                        color="black"
-                    />
-                </Text>
-                <Text
-                    onPress={() => {openUrl(URL.TWITTER)}}
-                    style={styles.button}
-                >
-                    <Icon
-                        name="twitter"
-                        size={48}
-                        color="black"
-                    />
-                </Text>
-                <Text
-                    onPress={() => {openUrl(URL.GITHUB)}}
-                    style={styles.button}
-                >
-                    <Icon
-                        name="github"
-                        size={48}
-                        color="black"
-                    />
-                </Text>
+                <TouchableOpacity onPress={() => {openUrl(URL.HOME)}}>
+                    <Text style={styles.button}>
+                        <Icon
+                            name="home"
+                            size={48}
+                            color="black"
+                        />
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {openUrl(URL.TWITTER)}}>
+                    <Text style={styles.button}>
+                        <Icon
+                            name="twitter"
+                            size={48}
+                            color="black"
+                        />
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {openUrl(URL.GITHUB)}}>
+                    <Text style={styles.button}>
+                        <Icon
+                            name="github"
+                            size={48}
+                            color="black"
+                        />
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
