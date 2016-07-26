@@ -4,5 +4,5 @@ import {
 } from 'react-native'
 
 export default function Spacer() {
-    return <View style={{paddingTop: 20}} />
+    return <View style={{height: 20}} />
 }

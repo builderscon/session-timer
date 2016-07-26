@@ -1,51 +1,30 @@
 import React from 'react'
 import {
     StyleSheet,
-    Text,
     View,
 } from 'react-native'
 import Spacer from './spacer'
 import Header from './header'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import CircularTimer from './circular-timer'
+import Timer from './timer'
 import Footer from './footer'
 import Modal from 'react-native-modalbox'
 import Copyright from './copyright'
-import Device from '../lib/device'
 import {
     NotificatableTimer,
     PRESETS,
 } from 'builderscon-session-timer-domain'
 import sound from '../lib/sound'
-import { progressToHoursMinutes } from '../lib/util'
 
 const FPS = 60
 
-const base = Device.shorter
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'stretch',
         backgroundColor: '#eeeeee',
     },
-    timer: {
-        flex: 4,
-        justifyContent: 'center',
-        alignSelf: 'center',
-    },
-    icon: {
-        top: base / 4.0,
-        alignSelf: 'center',
-        textAlign: 'center',
-    },
-    text: {
-        top: -(base / 2),
-        fontFamily: 'avenir',
-        fontSize: base / 5,
-        fontWeight: 'bold',
-        alignSelf: 'center',
-        textAlign: 'center',
+    app: {
+        flex: 1,
+        justifyContent: 'space-between',
     },
     modal: {
         height: 300,
@@ -112,56 +91,29 @@ export default class App extends React.Component {
         this.refs.copyright.open()
     }
 
-    get iconName() {
-        return this.props.state.isRunning ? 'play': 'pause'
-    }
-    get iconColor() {
-        return this.props.state.isRunning ? '#222222' : '#777777'
-    }
-    get textColor() {
-        return this.props.state.isRunning ? '#222222' : '#777777'
-    }
-
-    get remainingText() {
-        const total = this.timer.total
-        const progress = this.props.state.progress
-        return progressToHoursMinutes(progress, total)
-    }
-
     render() {
-        const { state, actions } = this.props
+        const { state } = this.props
         return (
             <View style={styles.container}>
                 <Spacer />
 
-                <Header
-                    onPressLogo={() => this.showCopyright()}
-                    onPressPresets={() => {state.isRunning || this.togglePresets()}}
-                />
-
-                <View style={styles.timer}>
-                    <Text style={styles.icon}>
-                        <Icon
-                            name={this.iconName}
-                            size={base / 6.5}
-                            color={this.iconColor}
-                        />
-                    </Text>
-                    <CircularTimer
-                        total={this.timer.total}
-                        progress={state.progress}
-                        isRunning={state.isRunning}
+                <View style={styles.app}>
+                    <Header
+                        onPressLogo={() => this.showCopyright()}
+                        onPressPresets={() => {state.isRunning || this.togglePresets()}}
                     />
-                    <Text style={[styles.text, {color: this.textColor}]}>
-                        {this.remainingText}
-                    </Text>
-                </View>
 
-                <Footer
-                    state={state}
-                    onPressToggle={() => state.isReady && (state.isRunning ? this.stop(): this.start())}
-                    onPressReset={() => {state.isRunning || this.reset()}}
-                />
+                    <Timer
+                        state={state}
+                        timer={this.timer}
+                    />
+
+                    <Footer
+                        state={state}
+                        onPressToggle={() => state.isReady && (state.isRunning ? this.stop(): this.start())}
+                        onPressReset={() => {state.isRunning || this.reset()}}
+                    />
+                </View>
 
                 <Modal
                     ref="copyright"
