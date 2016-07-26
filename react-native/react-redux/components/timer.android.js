@@ -16,18 +16,17 @@ const MAX_DEGREE = 360
 const { PropTypes } = React
 
 const base = Device.shorter
-const WIDTH = base * 0.75
-const HEIGHT = base * 0.75
+const SIZE = base * 0.75
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: WIDTH,
-        height: HEIGHT,
+        width: SIZE,
+        height: SIZE,
     },
     hex: {
-        width: WIDTH,
-        height: HEIGHT,
+        width: SIZE,
+        height: SIZE,
     },
     indicators: {
         flex: 1,
@@ -94,20 +93,18 @@ export default class Timer extends React.Component {
     render () {
         return (
             <View style={[styles.container, {
-                left: (this.props.state.window.width - WIDTH) / 2
+                left: (this.props.state.window.width - SIZE) / 2
             }]}>
                 <Image
                     source={{uri: 'hex_base'}}
                     style={[styles.hex, this.angleStyle]}
                 />
+
                 <View
-                    onLayout={event => {
-                        const {x, y, width, height} = event.nativeEvent.layout
-                        this.setState({x, y, width, height})
-                    }}
+                    onLayout={event => this.setState(event.nativeEvent.layout)}
                     style={[styles.indicators, {
-                        top: (HEIGHT - this.state.height) / 2,
-                        left: (WIDTH - this.state.width) / 2,
+                        top: (SIZE - this.state.height) / 2,
+                        left: (SIZE - this.state.width) / 2,
                     }]}
                 >
                     <Text style={styles.icon}>

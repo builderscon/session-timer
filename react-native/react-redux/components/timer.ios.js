@@ -10,17 +10,21 @@ import Device from '../lib/device'
 import { progressToHoursMinutes } from '../lib/util'
 
 const base = Device.shorter
+const SIZE = base * 0.75
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        width: SIZE,
+        height: SIZE,
     },
-    icon: {
-        top: base / 4.0,
+    indicators: {
+        flex: 1,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     text: {
-        top: -(base / 2),
         fontSize: base / 5,
         fontFamily: 'avenir',
         fontWeight: 'bold',
@@ -39,7 +43,7 @@ export default class Timer extends React.Component {
     constructor(props) {
         super(props)
 
-        this.width = Device.shorter * 0.8
+        this.state = {}
     }
 
     get iconName() {
@@ -65,26 +69,35 @@ export default class Timer extends React.Component {
 
     render () {
         return (
-            <View style={styles.container}>
-                <Text style={styles.icon}>
-                    <Icon
-                        name={this.iconName}
-                        size={base / 6.5}
-                        color={this.iconColor}
-                    />
-                </Text>
-
+            <View style={[styles.container, {
+                left: (this.props.state.window.width - SIZE) / 2
+            }]}>
                 <Progress.Circle
-                    size={this.width}
+                    size={SIZE}
                     progress={this.props.state.progress}
                     unfilledColor={this.circleColor}
                     color={'#eeeeee'}
-                    thickness={10}
+                    thickness={base / 50}
                 />
 
-                <Text style={[styles.text, {color: this.textColor}]}>
-                    {this.remainingText}
-                </Text>
+                <View
+                    onLayout={event => this.setState(event.nativeEvent.layout)}
+                    style={[styles.indicators, {
+                        top: (SIZE - this.state.height) / 2,
+                        left: (SIZE - this.state.width) / 2,
+                    }]}
+                >
+                    <Text style={styles.icon}>
+                        <Icon
+                            name={this.iconName}
+                            size={base / 6.5}
+                            color={this.iconColor}
+                        />
+                    </Text>
+                    <Text style={[styles.text, {color: this.textColor}]}>
+                        {this.remainingText}
+                    </Text>
+                </View>
             </View>
         )
     }
