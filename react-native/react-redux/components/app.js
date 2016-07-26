@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
     },
+    timer: {
+        flex: 1,
+    },
     modal: {
         height: 300,
         width: 300,
@@ -97,7 +100,13 @@ export default class App extends React.Component {
             <View style={styles.container}>
                 <Spacer />
 
-                <View style={styles.app}>
+                <View
+                    onLayout={event => {
+                        const {x, y, width, height} = event.nativeEvent.layout
+                        this.props.actions.rotate({x, y, width, height})
+                    }}
+                    style={styles.app}
+                >
                     <Header
                         onPressLogo={() => this.showCopyright()}
                         onPressPresets={() => {state.isRunning || this.togglePresets()}}
@@ -106,6 +115,7 @@ export default class App extends React.Component {
                     <Timer
                         state={state}
                         timer={this.timer}
+                        styles={styles.timer}
                     />
 
                     <Footer

@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     },
     text: {
         top: -(base / 2),
-        fontFamily: 'avenir',
         fontSize: base / 5,
+        fontFamily: 'avenir',
         fontWeight: 'bold',
     },
 })

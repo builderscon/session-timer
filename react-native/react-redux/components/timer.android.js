@@ -16,24 +16,29 @@ const MAX_DEGREE = 360
 const { PropTypes } = React
 
 const base = Device.shorter
+const WIDTH = base * 0.75
+const HEIGHT = base * 0.75
 const styles = StyleSheet.create({
-    timer: {
-        flex: 1,
+    container: {
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    icon: {
-        top: -240,
-    },
-    text: {
-        top: -220,
-        fontSize: 64,
-        fontFamily: 'avenir',
-        fontWeight: 'bold',
+        width: WIDTH,
+        height: HEIGHT,
     },
     hex: {
-        width: 300,
-        height: 300,
+        width: WIDTH,
+        height: HEIGHT,
+    },
+    indicators: {
+        flex: 1,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        fontSize: base / 5.4,
+        fontFamily: 'avenir',
+        fontWeight: 'bold',
     },
 })
 
@@ -47,8 +52,10 @@ export default class Timer extends React.Component {
 
     constructor(props) {
         super(props)
-
-        this.width = Device.shorter * 0.8
+        this.state = {
+            width: 0,
+            height: 0,
+        }
     }
 
     get iconName() {
@@ -86,22 +93,34 @@ export default class Timer extends React.Component {
 
     render () {
         return (
-            <View style={styles.timer}>
-                <View style={{marginTop: 64}} />
+            <View style={[styles.container, {
+                left: (this.props.state.window.width - WIDTH) / 2
+            }]}>
                 <Image
                     source={{uri: 'hex_base'}}
                     style={[styles.hex, this.angleStyle]}
                 />
-                <Text style={styles.icon}>
-                    <Icon
-                        name={this.iconName}
-                        size={40}
-                        color={this.iconColor}
-                    />
-                </Text>
-                <Text style={[styles.text, {color: this.textColor}]}>
-                    {this.remainingText}
-                </Text>
+                <View
+                    onLayout={event => {
+                        const {x, y, width, height} = event.nativeEvent.layout
+                        this.setState({x, y, width, height})
+                    }}
+                    style={[styles.indicators, {
+                        top: (HEIGHT - this.state.height) / 2,
+                        left: (WIDTH - this.state.width) / 2,
+                    }]}
+                >
+                    <Text style={styles.icon}>
+                        <Icon
+                            name={this.iconName}
+                            size={base / 8}
+                            color={this.iconColor}
+                        />
+                    </Text>
+                    <Text style={[styles.text, {color: this.textColor}]}>
+                        {this.remainingText}
+                    </Text>
+                </View>
             </View>
         )
     }
