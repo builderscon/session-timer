@@ -16,12 +16,9 @@ import {
     PRESETS,
 } from 'builderscon-session-timer-domain'
 import sound from '../lib/sound'
+import { zeroPadding } from '../lib/util'
 
 const FPS = 60
-
-function zeroPadding (n) {
-    return ('0' + n.toString()).slice(-2)
-}
 
 const base = Device.shorter
 const styles = StyleSheet.create({

@@ -16,14 +16,11 @@ import {
     PRESETS,
 } from 'builderscon-session-timer-domain'
 import sound from '../lib/sound'
+import { zeroPadding } from '../lib/util'
 
 const FPS = 10
 const ANIMATION_DURATION = 30 * 1000
 const MAX_DEGREE = 360
-
-function zeroPadding (n) {
-    return ('0' + n.toString()).slice(-2)
-}
 
 const styles = StyleSheet.create({
     container: {
