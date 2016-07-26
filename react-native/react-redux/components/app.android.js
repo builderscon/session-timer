@@ -123,6 +123,10 @@ export default class App extends React.Component {
     get iconColor() {
         return this.props.state.isRunning ? '#222222' : '#777777'
     }
+    get textColor() {
+        return this.props.state.isRunning ? '#222222' : '#777777'
+    }
+
     get remainingText() {
         const total = this.timer.total
         const progress = this.props.state.progress
@@ -163,7 +167,7 @@ export default class App extends React.Component {
                             color={this.iconColor}
                         />
                     </Text>
-                    <Text style={styles.text}>
+                    <Text style={[styles.text, {color: this.textColor}]}>
                         {this.remainingText}
                     </Text>
                 </View>
