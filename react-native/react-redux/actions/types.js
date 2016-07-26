@@ -1,5 +1,4 @@
 const actionKinds = [
-    'ROTATE',
     'SYNC',
     'START',
     'STOP',

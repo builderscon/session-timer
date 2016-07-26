@@ -9,8 +9,8 @@ import * as Progress from 'react-native-progress'
 import Device from '../lib/device'
 import { progressToHoursMinutes } from '../lib/util'
 
-const base = Device.shorter
-const SIZE = base * 0.75
+const BASE = Device.shorter
+const SIZE = BASE * 0.75
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        fontSize: base / 5,
+        fontSize: BASE / 5,
         fontFamily: 'avenir',
         fontWeight: 'bold',
     },
@@ -42,7 +42,6 @@ export default class Timer extends React.Component {
 
     constructor(props) {
         super(props)
-
         this.state = {}
     }
 
@@ -69,15 +68,13 @@ export default class Timer extends React.Component {
 
     render () {
         return (
-            <View style={[styles.container, {
-                left: (this.props.state.window.width - SIZE) / 2
-            }]}>
+            <View style={styles.container}>
                 <Progress.Circle
                     size={SIZE}
                     progress={this.props.state.progress}
                     unfilledColor={this.circleColor}
                     color={'#eeeeee'}
-                    thickness={base / 50}
+                    thickness={BASE / 50}
                 />
 
                 <View
@@ -90,7 +87,7 @@ export default class Timer extends React.Component {
                     <Text style={styles.icon}>
                         <Icon
                             name={this.iconName}
-                            size={base / 6.5}
+                            size={BASE / 6.5}
                             color={this.iconColor}
                         />
                     </Text>

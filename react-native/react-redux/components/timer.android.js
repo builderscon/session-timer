@@ -13,10 +13,8 @@ import { progressToHoursMinutes } from '../lib/util'
 const ANIMATION_DURATION = 30 * 1000
 const MAX_DEGREE = 360
 
-const { PropTypes } = React
-
-const base = Device.shorter
-const SIZE = base * 0.75
+const BASE = Device.shorter
+const SIZE = BASE * 0.75
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
@@ -35,14 +33,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        fontSize: base / 5.4,
+        fontSize: BASE / 5.4,
         fontFamily: 'avenir',
         fontWeight: 'bold',
     },
 })
 
+const { PropTypes } = React
 export default class Timer extends React.Component {
-    static get propTypes () {
+    static get propTypes() {
         return {
             state: PropTypes.object.isRequired,
             timer: PropTypes.object.isRequired,
@@ -51,10 +50,7 @@ export default class Timer extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            width: 0,
-            height: 0,
-        }
+        this.state = {}
     }
 
     get iconName() {
@@ -92,9 +88,7 @@ export default class Timer extends React.Component {
 
     render () {
         return (
-            <View style={[styles.container, {
-                left: (this.props.state.window.width - SIZE) / 2
-            }]}>
+            <View style={styles.container}>
                 <Image
                     source={{uri: 'hex_base'}}
                     style={[styles.hex, this.angleStyle]}
@@ -110,7 +104,7 @@ export default class Timer extends React.Component {
                     <Text style={styles.icon}>
                         <Icon
                             name={this.iconName}
-                            size={base / 8}
+                            size={BASE / 8}
                             color={this.iconColor}
                         />
                     </Text>

@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
     },
+    horizontalContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
     timer: {
         flex: 1,
     },
@@ -100,23 +104,19 @@ export default class App extends React.Component {
             <View style={styles.container}>
                 <Spacer />
 
-                <View
-                    onLayout={event => {
-                        const {x, y, width, height} = event.nativeEvent.layout
-                        this.props.actions.rotate({x, y, width, height})
-                    }}
-                    style={styles.app}
-                >
+                <View style={styles.app}>
                     <Header
                         onPressLogo={() => this.showCopyright()}
                         onPressPresets={() => {state.isRunning || this.togglePresets()}}
                     />
 
-                    <Timer
-                        state={state}
-                        timer={this.timer}
-                        styles={styles.timer}
-                    />
+                    <View style={styles.horizontalContainer}>
+                        <Timer
+                            state={state}
+                            timer={this.timer}
+                            styles={styles.timer}
+                        />
+                    </View>
 
                     <Footer
                         state={state}
