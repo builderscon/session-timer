@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     modalPresets: {
-        height: 300,
+        height: 428,
         width: 300,
         borderRadius: 16,
     },
