@@ -30,3 +30,15 @@ export function terminate() {
         type: types.TERMINATE
     }
 }
+
+export function openPresetModal() {
+    return {
+        type: types.OPEN_PRESET_MODAL
+    }
+}
+
+export function closePresetModal() {
+    return {
+        type: types.CLOSE_PRESET_MODAL
+    }
+}

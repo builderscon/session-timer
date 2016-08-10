@@ -8,6 +8,7 @@ import Header from './header'
 import Timer from './timer'
 import Footer from './footer'
 import Modal from 'react-native-modalbox'
+import Presets from './presets'
 import Copyright from './copyright'
 import {
     NotificatableTimer,
@@ -33,7 +34,12 @@ const styles = StyleSheet.create({
     timer: {
         flex: 1,
     },
-    modal: {
+    modalPresets: {
+        height: 300,
+        width: 300,
+        borderRadius: 16,
+    },
+    modalCopyright: {
         height: 300,
         width: 300,
         borderRadius: 16,
@@ -44,8 +50,6 @@ export default class App extends React.Component {
     constructor(props) {
         super(props)
 
-        this.index = 0
-
         this.timerContext = {
             sound,
             onTerminate: () => {
@@ -55,7 +59,7 @@ export default class App extends React.Component {
         }
 
         this.timer = new NotificatableTimer(
-            PRESETS[this.index],
+            PRESETS[0],
             this.timerContext
         )
     }
@@ -78,28 +82,28 @@ export default class App extends React.Component {
         this.timer.reset()
     }
 
-    togglePresets() {
-        ++this.index
-        if (PRESETS.length <= this.index) {
-            this.index = 0
-        }
-
+    setPresets(index) {
         this.timer = new NotificatableTimer(
-            PRESETS[this.index],
+            PRESETS[index],
             this.timerContext
         )
 
         const { actions } = this.props
         actions.reset()
         actions.sync(this.timer)
+        actions.closePresetModal()
     }
 
     showCopyright() {
         this.refs.copyright.open()
     }
 
+    showPresets() {
+        this.refs.presets.open()
+    }
+
     render() {
-        const { state } = this.props
+        const { state, modal } = this.props
         return (
             <View style={styles.container}>
                 <Spacer />
@@ -107,7 +111,7 @@ export default class App extends React.Component {
                 <View style={styles.app}>
                     <Header
                         onPressLogo={() => this.showCopyright()}
-                        onPressPresets={() => {state.isRunning || this.togglePresets()}}
+                        onPressPresets={() => {state.isRunning || this.showPresets()}}
                     />
 
                     <View style={styles.horizontalContainer}>
@@ -126,9 +130,21 @@ export default class App extends React.Component {
                 </View>
 
                 <Modal
+                    ref="presets"
+                    position="center"
+                    style={styles.modalPresets}
+                    isOpen={modal.presetIsOpen}
+                >
+                    <Presets
+                        presets={PRESETS}
+                        onPress={index => this.setPresets(index)}
+                    />
+                </Modal>
+
+                <Modal
                     ref="copyright"
                     position="center"
-                    style={styles.modal}
+                    style={styles.modalCopyright}
                 >
                     <Copyright />
                 </Modal>
