@@ -90,8 +90,8 @@ android {
         applicationId "io.builderscon.sessiontimer"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 10003
-        versionName "1.0.3"
+        versionCode 10004
+        versionName "1.0.4"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
