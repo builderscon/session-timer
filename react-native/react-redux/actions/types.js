@@ -4,6 +4,8 @@ const actionKinds = [
     'STOP',
     'RESET',
     'TERMINATE',
+    'OPEN_PRESET_MODAL',
+    'CLOSE_PRESET_MODAL',
 ]
 
 function buildActionTypes(kinds) {

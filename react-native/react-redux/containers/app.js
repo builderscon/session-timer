@@ -13,9 +13,10 @@ import * as actions from '../actions/creators'
 import App from '../components/app'
 
 const ConnectedApp = connect(state => ({
-    state: state.timer
+    state: state.timer,
+    modal: state.modal,
 }), dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
 }))(App)
 
 const store = createStore(reducers)
