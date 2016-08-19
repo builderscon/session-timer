@@ -32,7 +32,7 @@ const PRESETS = [
             context.onTerminate()
         },
         notifications: {
-            [5 * MINUTES]: context => context.sound.play(),
+            [10 * MINUTES]: context => context.sound.play(),
         },
     },
     {
