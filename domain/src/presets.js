@@ -22,7 +22,7 @@ const PRESETS = [
         },
         notifications: {
             [15 * MINUTES]: context => context.sound.play(),
-            [20 * MINUTES]: context => context.sound.playTwice(),
+            [25 * MINUTES]: context => context.sound.playTwice(),
         },
     },
     {
